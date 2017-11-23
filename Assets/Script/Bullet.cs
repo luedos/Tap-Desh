@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour {
     public float LifeTime = 5f;
 
     private string MyTag;
-    private float LoadLevel;
+    private float LoadLevel = 1;
 
     public string Tag { get { return MyTag; } set { MyTag = value; } }
 
@@ -39,11 +39,12 @@ public class Bullet : MonoBehaviour {
     {
         if (other.gameObject.tag == MyTag)
         {
+            
             HealthPoints EnemyHealth = other.gameObject.GetComponent<HealthPoints>();
             if (EnemyHealth != null)
             {
                 EnemyHealth.DoDamage(Damage * LoadLevel);
-                BulletDestroy();
+                
             }
 
             

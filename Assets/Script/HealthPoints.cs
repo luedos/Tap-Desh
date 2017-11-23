@@ -8,10 +8,14 @@ public class HealthPoints : MonoBehaviour {
 
     public void DoDamage(float Damage)
     {
-        if (HP - Damage <= 0f)
-            Destroy(gameObject);
-        else
-            HP -= Damage;
         
+
+        HP -= Damage;
+
+        if (HP <= 0f)
+        {
+            
+            Destroy(gameObject);
+        }
     }
 }

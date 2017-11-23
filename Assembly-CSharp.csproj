@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Script\Bullet.cs" />
+     <Compile Include="Assets\Script\BulletSpawner.cs" />
      <Compile Include="Assets\Script\CharMovement.cs" />
      <Compile Include="Assets\Script\CharShooting.cs" />
      <Compile Include="Assets\Script\HealthPoints.cs" />
