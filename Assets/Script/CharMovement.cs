@@ -76,7 +76,7 @@ public class CharMovement : MonoBehaviour {
 
         if (Num > 0)
         {
-            print("Good num");
+            
             float Coeffition;
             Vector2 MyVector;
             

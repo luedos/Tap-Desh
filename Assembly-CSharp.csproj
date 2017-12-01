@@ -57,6 +57,7 @@
      <Compile Include="Assets\Script\CharShooting.cs" />
      <Compile Include="Assets\Script\HealthPoints.cs" />
      <Compile Include="Assets\Script\MobileInput.cs" />
+     <Compile Include="Assets\Script\PickUp_Inv.cs" />
      <Compile Include="Assets\Script\ReflectBullets.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Programs/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

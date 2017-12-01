@@ -19,14 +19,7 @@ public class Bullet : MonoBehaviour {
         Destroy(gameObject, LifeTime);
     }
 	
-	// Update is called once per frame
-	void Update () {
-       // LocalLifeTime += Time.deltaTime;
-       //
-       // if (LocalLifeTime > LifeTime)
-            
-	}
-
+	
     public void BulletDestroy()
     {
 
@@ -39,16 +32,17 @@ public class Bullet : MonoBehaviour {
     {
         if (other.gameObject.tag == MyTag)
         {
-            
+            bool DestroyAfter = true;
             HealthPoints EnemyHealth = other.gameObject.GetComponent<HealthPoints>();
             if (EnemyHealth != null)
             {
+                DestroyAfter = !EnemyHealth.IsInvincible;
                 EnemyHealth.DoDamage(Damage * LoadLevel);
                 
             }
 
-            
-            BulletDestroy();
+            if(DestroyAfter)
+                BulletDestroy();
 
         }
         else
