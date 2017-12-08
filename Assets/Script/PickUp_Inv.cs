@@ -19,8 +19,7 @@ public class PickUp_Inv : MonoBehaviour
 
         void OnTriggerEnter2D(Collider2D other)
     {
-        print("TriggerEnter");
-
+      
         if(other.tag == "Player")
         {
             HealthPoints OtherHP = other.gameObject.GetComponent<HealthPoints>();

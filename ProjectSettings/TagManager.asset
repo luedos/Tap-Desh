@@ -21,8 +21,8 @@ TagManager:
   - PlayerBullet
   - Enemy
   - Player
-  - 
-  - 
+  - StrongWall
+  - SoftWall
   - 
   - 
   - 

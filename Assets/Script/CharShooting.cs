@@ -9,11 +9,17 @@ public class CharShooting : MonoBehaviour {
     public float MaxLoad = 2;
     public float TouchSensitivity = 0f;
     public float LoadMultiplier = 1f;
+    public float MultiFireAngle = 20f;
 
+    private bool IsDD = false;
+    private float DDTimer = 0f;
     private Camera MyCamera;
     private MobileInput MyMobileInput;
     private bool LoadChar = false;
     private float Load = 0f;
+    private int FireMultiplacator = 0;
+
+
     // Use this for initialization
     void Start () {
         MyMobileInput = GetComponent<MobileInput>();
@@ -29,6 +35,16 @@ public class CharShooting : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        
+        if(IsDD)
+        {
+            DDTimer -= Time.deltaTime;
+            if(DDTimer < 0)
+            {
+                IsDD = false;
+                DDTimer = 0;
+            }
+        }
 
         if (MyMobileInput.Tap)
         {
@@ -40,9 +56,7 @@ public class CharShooting : MonoBehaviour {
             if ((GetPositionFromScreen(MyMobileInput.StartPosition) - transform.position).magnitude < TouchSensitivity || TouchSensitivity == 0f)
                 LoadChar = true;
         }
-
         
-
         if (LoadChar)
         {
             if (Load < MaxLoad)
@@ -56,26 +70,43 @@ public class CharShooting : MonoBehaviour {
 
         if (MyMobileInput.Swipe && LoadChar)
         {
-            Vector3 SpawnVector = GetPositionFromScreen(MyMobileInput.LastPosition)- transform.position;
+            Vector3 StartVector = GetPositionFromScreen(MyMobileInput.LastPosition)- transform.position;
 
-            Quaternion SpawnQuat = Quaternion.FromToRotation(Vector3.up, SpawnVector);
+            Quaternion SpawnQuat = Quaternion.FromToRotation(Vector3.up, StartVector);
             
-            SpawnVector = (SpawnVector/SpawnVector.magnitude) * 2f + transform.position;
+            StartVector = StartVector.normalized * 2f + transform.position;
 
-            GameObject MyBullet = null;
+            Fire(StartVector, SpawnQuat);
 
-            if (BulletToShoot != null)
-                MyBullet = Instantiate(BulletToShoot, SpawnVector, SpawnQuat);
-            else
-                print("Out of BulletToShoot (CharShooting)");
 
-            if (MyBullet != null)
+
+
+            if (FireMultiplacator > 0)
             {
-                MyBullet.GetComponent<Bullet>().SetLoadLevel(1 + Load);
-                MyBullet.GetComponent<Bullet>().Tag = "Enemy";
-                MyBullet.layer = 10;
-            }
+                int ForLength = FireMultiplacator > 2 ? FireMultiplacator * 4 - 4 : FireMultiplacator * 2;
+                for (int i = 1; i < ForLength + 1; ++i)
+                {
+                    float SpawnAngleZ = Quaternion.FromToRotation(Vector3.up, StartVector - transform.position).eulerAngles.z;
 
+                    SpawnAngleZ += MultiFireAngle * (i % 2 == 0 ? (-1f) : 1f) * ((i + 1) / 2);
+
+
+
+                    if (SpawnAngleZ < 0)
+                        SpawnAngleZ += 360;
+
+                    print(SpawnAngleZ);
+
+                    Vector3 VectorToSpawn = new Vector3();
+
+                    VectorToSpawn.x = Mathf.Cos(Mathf.PI * (SpawnAngleZ + 90f) / 180f);
+                    VectorToSpawn.y = Mathf.Sin(Mathf.PI * (SpawnAngleZ + 90f) / 180f);
+
+                    Fire(VectorToSpawn * 2f + transform.position, Quaternion.Euler(0, 0, SpawnAngleZ));
+
+
+                }
+            }
 
             ResetAll();
         }
@@ -102,4 +133,57 @@ public class CharShooting : MonoBehaviour {
 
         GetComponent<SpriteRenderer>().color = Color.white;
     }
+
+    public void MakeDD(float InTime)
+    {
+        IsDD = true;
+        DDTimer = InTime;
+    }
+
+    private void Fire(Vector3 SpawnVector, Quaternion SpawnQuat)
+    {
+        GameObject MyBullet = null;
+
+        if (BulletToShoot != null)
+            MyBullet = Instantiate(BulletToShoot, SpawnVector, SpawnQuat);
+        else
+            print("Out of BulletToShoot (CharShooting)");
+
+        if (MyBullet != null)
+        {
+            float LoadLvl = IsDD ? (1 + Load) * 2 : 1 + Load;
+            MyBullet.GetComponent<Bullet>().SetLoadLevel(LoadLvl);
+            if (IsDD)
+                MyBullet.GetComponent<Bullet>().BulletSpeed *= 2;
+            MyBullet.GetComponent<Bullet>().Tag = "Enemy";
+            MyBullet.layer = 10;
+        }
+    }
+
+    public void SetFireMultOnLevel(int InLevel)
+    {
+        switch (InLevel)
+        {
+            case -1:
+                {
+                    if (FireMultiplacator > 0)
+                        --FireMultiplacator;
+                    break;
+                }
+            case 5:
+                {
+                    if (FireMultiplacator < 5)
+                        ++FireMultiplacator;
+                    break;
+                }
+
+            default:
+                {
+                    if (InLevel > -1 && InLevel < 5)
+                        FireMultiplacator = InLevel;
+                    break;
+                }
+        }
+    }
+
 }

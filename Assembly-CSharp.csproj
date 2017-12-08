@@ -57,6 +57,9 @@
      <Compile Include="Assets\Script\CharShooting.cs" />
      <Compile Include="Assets\Script\HealthPoints.cs" />
      <Compile Include="Assets\Script\MobileInput.cs" />
+     <Compile Include="Assets\Script\PickUp_BT.cs" />
+     <Compile Include="Assets\Script\PickUp_DD.cs" />
+     <Compile Include="Assets\Script\PickUp_FM.cs" />
      <Compile Include="Assets\Script\PickUp_Inv.cs" />
      <Compile Include="Assets\Script\ReflectBullets.cs" />
  <Reference Include="UnityEngine.UI">

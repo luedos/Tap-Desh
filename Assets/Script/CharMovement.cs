@@ -6,6 +6,9 @@ public class CharMovement : MonoBehaviour {
 
     public float CameraInterpSpeed = 0;
 
+
+    private float BetterTPTimer = 0f;
+    public bool isBetterTP = false;
     private Camera MyCamera;
     private MobileInput MyMobileInput;
     private Vector3 CameraPosition;
@@ -32,6 +35,15 @@ public class CharMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
+       if(isBetterTP)
+       {
+           BetterTPTimer -= Time.deltaTime;
+           if(BetterTPTimer < 0)
+           {
+               BetterTPTimer = 0;
+               isBetterTP = false;
+           }
+       }
 
         if(MyMobileInput.Tap)
         {
@@ -62,14 +74,39 @@ public class CharMovement : MonoBehaviour {
 
     private bool GoToPosition(Vector2 InPosition)
     {
-        Vector2 MyOrigin = transform.position;
-        
-
         RaycastHit2D NewHit;
-        NewHit = Physics2D.Raycast(MyOrigin, InPosition-MyOrigin,(InPosition-MyOrigin).magnitude);
-       
-        Vector2 InPosLocal = NewHit ? NewHit.point + NewHit.normal * 0.1f : InPosition;
+        Vector2 MyOrigin = transform.position;
+        Vector2 InPosLocal;
 
+        
+        if (isBetterTP)
+        {
+            List<RaycastHit2D> NewList;
+
+            bool CollRes = true;
+
+            Collider2D MyColl = Physics2D.OverlapPoint(InPosition);
+
+            if (MyColl != null)
+                if (MyColl.tag != transform.tag)
+                    CollRes = false;
+
+           
+
+            if (!SoftRayCast2D(MyOrigin, InPosition, out NewList) && CollRes)
+                InPosLocal = InPosition;
+            else
+                InPosLocal = NewList[NewList.Count - 1].point + NewList[NewList.Count - 1].normal * 0.1f;
+           
+
+            
+
+        }
+        else
+        { 
+            NewHit = Physics2D.Raycast(MyOrigin, InPosition - MyOrigin, (InPosition - MyOrigin).magnitude);
+            InPosLocal = NewHit ? NewHit.point + NewHit.normal * 0.1f : InPosition;
+        }
         RaycastHit2D[] NewRaycastHit = new RaycastHit2D[8];
 
         int Num = SphereHit(ref NewRaycastHit, InPosLocal, 2);
@@ -94,7 +131,10 @@ public class CharMovement : MonoBehaviour {
             return true;
         }
         
-        transform.position = InPosition;
+
+        
+
+        transform.position = InPosLocal;
 
         return true;
       
@@ -133,6 +173,49 @@ public class CharMovement : MonoBehaviour {
 
 
         return RetInt;
+    }
+
+
+    public void MakeBetterTP(float InTime)
+    {
+        isBetterTP = true;
+        BetterTPTimer = InTime;
+    }
+
+    private bool SoftRayCast2D(Vector2 Start, Vector2 End, out List<RaycastHit2D> OutHit)
+    {
+       
+
+        OutHit = new List<RaycastHit2D>();
+
+        RaycastHit2D LocalRayHit;
+
+        Vector2 StartPos = Start;
+  
+
+        while (true)
+        {
+            LocalRayHit = Physics2D.Raycast(StartPos, End - StartPos, (End - StartPos).magnitude);
+
+            if (!LocalRayHit)
+                return false;
+
+            OutHit.Add(LocalRayHit);
+            
+
+            if (LocalRayHit.collider.gameObject.layer != 14)
+                return true;
+
+            StartPos = LocalRayHit.point;
+
+
+            if (OutHit.Count > 30)
+            {
+                print("Too much Hits!!!");
+                return false;
+            }
+        }
+
     }
 }
 
