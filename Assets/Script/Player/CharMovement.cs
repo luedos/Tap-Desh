@@ -6,13 +6,15 @@ public class CharMovement : MonoBehaviour {
 
     public float CameraInterpSpeed = 0;
 
+    [HideInInspector]
+    public Vector3 MyLastLoc;
 
     private float BetterTPTimer = 0f;
-    public bool isBetterTP = false;
+    private bool isBetterTP = false;
     private Camera MyCamera;
     private MobileInput MyMobileInput;
     private Vector3 CameraPosition;
-
+    //private bool isLeft = false;
 
     // Use this for initialization
     void Start () {
@@ -20,7 +22,7 @@ public class CharMovement : MonoBehaviour {
         if (MyMobileInput == null)
             print("Out of mobile input (CharMovement)");
 
-
+        MyLastLoc = transform.position;
 
         MyCamera = GetComponentInChildren<Camera>();
 
@@ -34,8 +36,11 @@ public class CharMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-       if(isBetterTP)
+
+       // transform.position += Vector3.right * (isLeft ? -0.01f : 0.01f);
+       // isLeft = !isLeft;
+
+        if (isBetterTP)
        {
            BetterTPTimer -= Time.deltaTime;
            if(BetterTPTimer < 0)
@@ -47,6 +52,7 @@ public class CharMovement : MonoBehaviour {
 
         if(MyMobileInput.Tap)
         {
+            MyLastLoc = transform.position;
             GoToPosition( GetPositionFromScreen(MyMobileInput.LastPosition));
         }
 

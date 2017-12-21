@@ -52,16 +52,26 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Script\Bullet.cs" />
-     <Compile Include="Assets\Script\BulletSpawner.cs" />
-     <Compile Include="Assets\Script\CharMovement.cs" />
-     <Compile Include="Assets\Script\CharShooting.cs" />
-     <Compile Include="Assets\Script\HealthPoints.cs" />
-     <Compile Include="Assets\Script\MobileInput.cs" />
-     <Compile Include="Assets\Script\PickUp_BT.cs" />
-     <Compile Include="Assets\Script\PickUp_DD.cs" />
-     <Compile Include="Assets\Script\PickUp_FM.cs" />
-     <Compile Include="Assets\Script\PickUp_Inv.cs" />
+     <Compile Include="Assets\Script\Enemy\EnemyAI.cs" />
+     <Compile Include="Assets\Script\Enemy\U_EQS_Query_EnemyLastLoc.cs" />
+     <Compile Include="Assets\Script\Enemy\U_EQS_Query_EnemyLoc.cs" />
+     <Compile Include="Assets\Script\PickUps\PickUp_BT.cs" />
+     <Compile Include="Assets\Script\PickUps\PickUp_DD.cs" />
+     <Compile Include="Assets\Script\PickUps\PickUp_FM.cs" />
+     <Compile Include="Assets\Script\PickUps\PickUp_Inv.cs" />
+     <Compile Include="Assets\Script\Player\BulletSpawner.cs" />
+     <Compile Include="Assets\Script\Player\CharMovement.cs" />
+     <Compile Include="Assets\Script\Player\CharShooting.cs" />
+     <Compile Include="Assets\Script\Player\HealthPoints.cs" />
+     <Compile Include="Assets\Script\Player\MobileInput.cs" />
      <Compile Include="Assets\Script\ReflectBullets.cs" />
+     <Compile Include="Assets\Script\U_EQS\U_EQS_DistanceTest.cs" />
+     <Compile Include="Assets\Script\U_EQS\U_EQS_G_Grid.cs" />
+     <Compile Include="Assets\Script\U_EQS\U_EQS_Generator.cs" />
+     <Compile Include="Assets\Script\U_EQS\U_EQS_PointCollision2DTest.cs" />
+     <Compile Include="Assets\Script\U_EQS\U_EQS_Query.cs" />
+     <Compile Include="Assets\Script\U_EQS\U_EQS_Test.cs" />
+     <Compile Include="Assets\Script\U_EQS\U_EQS_Trace2DTest.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Programs/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
