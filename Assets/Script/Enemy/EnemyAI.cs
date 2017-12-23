@@ -29,14 +29,15 @@ public class EnemyAI : MonoBehaviour {
     private float TPTimer = 0f;
     private float FireTimer = 0f;
     private Vector3 Location;
+    private float ViewRadius = 20f;
     // For search method
     private Vector3 MyLastLoc;
     private SearchState MySearchState = 0;
     private float SearchWaitTimer;
+    private float IncideTPTimer = 0f;
 
-
-    // For Enemy customisation
-    public float ViewRadius = 20f;
+    // For Enemy customisation    
+    public int[] InvisibleLayers;
     public GameObject Bullet = null;
     public float FireRate = 1.5f;
     public float TPDistance = 5f;
@@ -46,6 +47,8 @@ public class EnemyAI : MonoBehaviour {
     public U_EQS_Generator SearchSpotGenerator = null;
     public float BulletLoadLevel = 1f;
     public float SearchWaitingTime = 3f;
+    public float TPTime = 0.5f;
+    public GameObject TP_Particle = null;
 
     public Vector3 StartSerchLocation { get { return MyLastLoc; } }
     public Vector3 Destination { get { return Location; } }
@@ -53,8 +56,10 @@ public class EnemyAI : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+        
+
         if (Perception != null)
-            Perception.radius = ViewRadius;
+            ViewRadius = Perception.radius;
         else
             print("Out of perception : " + gameObject.name);
 
@@ -102,50 +107,41 @@ public class EnemyAI : MonoBehaviour {
         transform.position += Vector3.right * (isLeft ? -0.01f : 0.01f);
         isLeft = !isLeft;
 
-        
+
+        if(IncideTPTimer > 0f)
+        {
+            IncideTPTimer -= Time.deltaTime;
+            if(IncideTPTimer < 0f)
+            {
+                IncideTPTimer = 0f;
+                EndOfTP();
+            }
+        }
+
         
         if (EnemyTriggered && enemy != null)
         {
-            
+            //RaycastHit2D MyRay = Physics2D.Raycast(transform.position, enemy.transform.position - transform.position, (enemy.transform.position - transform.position).magnitude);
 
-            RaycastHit2D MyRay = Physics2D.Raycast(transform.position, enemy.transform.position - transform.position, (enemy.transform.position - transform.position).magnitude);
+            List<RaycastHit2D> MyRayCast;
 
-            if (MyRay)
+            if (SoftRayCast2D(transform.position, enemy.transform.position, out MyRayCast))
             {
-                if (MyState < AI_State.Attack && MyRay.transform.tag == "Player")
+                if (MyState < AI_State.Attack && MyRayCast[MyRayCast.Count - 1].transform.tag == "Player")
                 {
-                    enemy = MyRay.transform.gameObject;
-                    MyState = AI_State.Attack;
-                    FireTimer = FireRate / 2;
+                    GoAttack(MyRayCast[MyRayCast.Count - 1].transform.gameObject);
                 }
 
-                if(MyState == AI_State.Attack && MyRay.transform.tag != "Player")
+                if(MyState == AI_State.Attack && MyRayCast[MyRayCast.Count - 1].transform.tag != "Player")
                 {
-                    Location = enemy.GetComponent<CharMovement>().MyLastLoc;
-                    MyLastLoc = transform.position;
-                    MyState = AI_State.Search;
-                    MySearchState = SearchState.ToLastLoc;
-                    TPTimer = TPRate;
+                    GoSearch();
                 }
             }
-
-            //if( (enemy.transform.position - transform.position).magnitude > Perception.radius)
-            //{
-            //    if(MyState == AI_State.Attack)
-            //    {
-            //        Location = enemy.GetComponent<CharMovement>().MyLastLoc;
-            //        MyLastLoc = transform.position;
-            //        MyState = AI_State.Search;
-            //        MySearchState = SearchState.ToLastLoc;
-            //        TPTimer = TPRate;
-            //    }
-            //                    
-            //    EnemyTriggered = false;
-            //}
+            
         }
 
         if (enemy == null && MyState != AI_State.Idle)
-            MyState = AI_State.Idle;
+            GoIdle();
 
         TPTimer -= Time.deltaTime;
 
@@ -154,8 +150,11 @@ public class EnemyAI : MonoBehaviour {
             FireTimer -= Time.deltaTime;
             if(FireTimer < 0)
             {
-                Fire(enemy.transform.position);
-                FireTimer = FireRate;
+                if (IncideTPTimer == 0f)
+                {
+                    Fire(enemy.transform.position);
+                    FireTimer = FireRate;
+                }
             }
 
             if(TPTimer < 0)
@@ -209,16 +208,18 @@ public class EnemyAI : MonoBehaviour {
                     {
                         SearchWaitTimer -= Time.deltaTime;
                         if (SearchWaitTimer < 0)
-                            MyState = AI_State.Idle;
+                            GoIdle();
                         break;
                     }
                 default:
                     {
-                        MyState = AI_State.Idle;
+                        GoIdle();
                         break;
                     }
             }
         }
+
+
 
     }
 
@@ -237,24 +238,50 @@ public class EnemyAI : MonoBehaviour {
         if (other.tag == "Player" && enemy == other.gameObject) 
         {
             if (MyState == AI_State.Attack)
-            {
-                Location = enemy.GetComponent<CharMovement>().MyLastLoc;
-                MyLastLoc = transform.position;
-                MyState = AI_State.Search;
-                MySearchState = SearchState.ToLastLoc;
-                TPTimer = TPRate;
-            }
+                GoSearch();
+            
 
             EnemyTriggered = false;
         }
     }
 
+    public void GoIdle()
+    {
+        MyState = AI_State.Idle;
+        Perception.radius = ViewRadius;
+    }
+
+    public void GoSearch()
+    {
+        Location = enemy.GetComponent<CharMovement>().MyLastLoc;
+        MyLastLoc = transform.position;
+        MyState = AI_State.Search;
+        MySearchState = SearchState.ToLastLoc;
+        TPTimer = TPRate;
+    }
+
+    public void GoAttack(GameObject Enemy)
+    {
+        enemy = Enemy;
+        if(MyState == AI_State.Idle)
+            Perception.radius = ViewRadius * 1.5f;
+        MyState = AI_State.Attack;
+        FireTimer = FireRate / 2;
+        
+    }
+
+    private void EndOfTP()
+    {
+        gameObject.GetComponent<SpriteRenderer>().enabled = true;
+
+        gameObject.layer = 11;
+    }
 
     public void Fire(Vector3 InPoint)
     {
         Vector3 SpawnDirection = (InPoint - transform.position).normalized;
 
-        Quaternion SpawnQuat = Quaternion.LookRotation(SpawnDirection);
+        Quaternion SpawnQuat = Quaternion.FromToRotation(Vector3.up, SpawnDirection);
 
         GameObject MyBullet = null;
 
@@ -274,6 +301,22 @@ public class EnemyAI : MonoBehaviour {
 
     public bool TP_ToPos(Vector3 InPoint)
     {
+
+        if (TP_Particle != null)
+        {
+            GameObject MyPar = Instantiate(TP_Particle, transform.position, transform.rotation);
+
+            ParticleAttractor MyAttractor = MyPar.GetComponent<ParticleAttractor>();
+            if (MyAttractor != null)
+                MyAttractor.PointToAttract = transform;
+        }
+        
+        GetComponent<SpriteRenderer>().enabled = false;
+
+        IncideTPTimer = 0.5f;
+
+        gameObject.layer = 15;
+
         bool ToReturn = false;
         Vector2 InPosLocal = InPoint;
 
@@ -338,8 +381,51 @@ public class EnemyAI : MonoBehaviour {
         
         return RetInt;
     }
+    
+    private bool SoftRayCast2D(Vector2 Start, Vector2 End, out List<RaycastHit2D> OutHit)
+    {
+        OutHit = new List<RaycastHit2D>();
+
+        RaycastHit2D LocalRayHit;
+
+        Vector2 StartPos = Start;
 
 
+        while (true)
+        {
+            LocalRayHit = Physics2D.Raycast(StartPos, End - StartPos, (End - StartPos).magnitude);
 
+            if (!LocalRayHit)
+                return false;
+
+            OutHit.Add(LocalRayHit);
+            
+            
+            bool isFind = false;
+
+            for(int i = 0; i < InvisibleLayers.Length; ++i)
+            {
+                if(LocalRayHit.collider.gameObject.layer == InvisibleLayers[i])
+                {
+                    
+                    isFind = true;
+                    break;
+                }
+            }
+
+            if (!isFind)
+                return true;
+
+            StartPos = LocalRayHit.point + (LocalRayHit.point - StartPos).normalized * 0.01f;
+
+
+            if (OutHit.Count > 30)
+            {
+                print("Too much Hits!!!");
+                return false;
+            }
+        }
+
+    }
 
 }

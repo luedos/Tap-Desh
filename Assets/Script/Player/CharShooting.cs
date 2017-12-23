@@ -130,7 +130,7 @@ public class CharShooting : MonoBehaviour {
     {
         Load = 0f;
         LoadChar = false;
-
+        
         GetComponent<SpriteRenderer>().color = Color.white;
     }
 

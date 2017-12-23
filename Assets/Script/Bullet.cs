@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour {
 
-    public float Damage = 35;
+    
     public float BulletSpeed = 10f;
     public float LifeTime = 5f;
 
@@ -37,7 +37,7 @@ public class Bullet : MonoBehaviour {
             if (EnemyHealth != null)
             {
                 DestroyAfter = !EnemyHealth.IsInvincible;
-                EnemyHealth.DoDamage(Damage * LoadLevel);
+                EnemyHealth.DoDamage((int)Mathf.Floor(LoadLevel));
                 
             }
 

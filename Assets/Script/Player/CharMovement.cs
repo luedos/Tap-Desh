@@ -5,6 +5,8 @@ using UnityEngine;
 public class CharMovement : MonoBehaviour {
 
     public float CameraInterpSpeed = 0;
+    public GameObject MyParticle;
+    public float TPTime = 0.5f;
 
     [HideInInspector]
     public Vector3 MyLastLoc;
@@ -14,6 +16,9 @@ public class CharMovement : MonoBehaviour {
     private Camera MyCamera;
     private MobileInput MyMobileInput;
     private Vector3 CameraPosition;
+
+    private float VisibleTimer = 0f;
+
     //private bool isLeft = false;
 
     // Use this for initialization
@@ -32,14 +37,32 @@ public class CharMovement : MonoBehaviour {
         CameraPosition = transform.position;
         CameraPosition.z = 5f;
         MyCamera.transform.position = CameraPosition;
+
+
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-       // transform.position += Vector3.right * (isLeft ? -0.01f : 0.01f);
-       // isLeft = !isLeft;
+        // transform.position += Vector3.right * (isLeft ? -0.01f : 0.01f);
+        // isLeft = !isLeft;
 
+        if (VisibleTimer > 0f)
+        {
+
+            VisibleTimer -= Time.deltaTime;
+
+        }
+        else
+        if (VisibleTimer < 0f)
+        {
+
+            VisibleTimer = 0f;
+            ReturnVisible();
+        }
+
+        
+       
         if (isBetterTP)
        {
            BetterTPTimer -= Time.deltaTime;
@@ -78,13 +101,41 @@ public class CharMovement : MonoBehaviour {
         return MyVector;
     }
 
+    private void ReturnVisible()
+    {
+
+        gameObject.GetComponent<SpriteRenderer>().enabled = true;
+
+        
+
+        gameObject.layer = 12;
+    }
+
     private bool GoToPosition(Vector2 InPosition)
     {
         RaycastHit2D NewHit;
         Vector2 MyOrigin = transform.position;
         Vector2 InPosLocal;
 
-        
+        if(MyParticle != null)
+        {
+            GameObject MyPar = Instantiate(MyParticle,transform.position,transform.rotation);
+            
+            ParticleAttractor MyAttractor = MyPar.GetComponent<ParticleAttractor>();
+            if (MyAttractor != null)
+                MyAttractor.PointToAttract = transform;
+        }
+
+
+
+
+        GetComponent<SpriteRenderer>().enabled = false;
+
+        VisibleTimer = TPTime;
+
+        gameObject.layer = 15;
+
+
         if (isBetterTP)
         {
             List<RaycastHit2D> NewList;
@@ -133,6 +184,9 @@ public class CharMovement : MonoBehaviour {
             }
 
             transform.position = InPosLocal;
+
+
+
 
             return true;
         }

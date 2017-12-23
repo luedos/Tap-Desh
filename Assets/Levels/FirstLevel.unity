@@ -151,6 +151,37 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114575514406535620, guid: 199fe29ac531d0c4298d035417cc8996,
+        type: 2}
+      propertyPath: MyParticle
+      value: 
+      objectReference: {fileID: 1209545600571120, guid: 9f4f8993e9abf1b49b5776362947b752,
+        type: 2}
+    - target: {fileID: 212637863112944712, guid: 199fe29ac531d0c4298d035417cc8996,
+        type: 2}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212637863112944712, guid: 199fe29ac531d0c4298d035417cc8996,
+        type: 2}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 212637863112944712, guid: 199fe29ac531d0c4298d035417cc8996,
+        type: 2}
+      propertyPath: m_FlipY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114716981430421564, guid: 199fe29ac531d0c4298d035417cc8996,
+        type: 2}
+      propertyPath: HP
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114575514406535620, guid: 199fe29ac531d0c4298d035417cc8996,
+        type: 2}
+      propertyPath: TPTime
+      value: 0.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 199fe29ac531d0c4298d035417cc8996, type: 2}
   m_IsPrefabParent: 0

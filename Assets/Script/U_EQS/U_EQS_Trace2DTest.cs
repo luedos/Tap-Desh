@@ -25,13 +25,13 @@ public class U_EQS_Trace2DTest : U_EQS_Test {
         RaycastHit2D MyRayCast = Physics2D.Raycast(InPoint, MyDirection, MyDirection.magnitude) ;
 
         if (!MyRayCast)
-            MyRay = 0;
-
-        if (MyQuery.GetTransform() != null)
-            MyRay = MyRayCast.transform == MyQuery.GetTransform() ? 1 : 0;
+            MyRay = 1;
         else
-            MyRay = MyRayCast.transform.tag == ForTag ? 1 : 0;
-
+            if (MyQuery.GetTransform() != null)
+                MyRay = MyRayCast.transform == MyQuery.GetTransform() ? 1 : 0;
+            else
+                MyRay = MyRayCast.transform.tag == ForTag ? 1 : 0;
+        
         
 
         if (MyRay - MyVis != 0)

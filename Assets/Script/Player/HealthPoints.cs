@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class HealthPoints : MonoBehaviour {
 
-    public float HP = 100f;
+    public int HP = 3;
     public bool IsInvincible { get { return isInvincible; } }
 
 
     private float InvinsibilityTimer = 0f;
     private bool isInvincible = false;
 
-    public void DoDamage(float Damage)
+    public void DoDamage(int Damage)
     {
         
         if(!isInvincible)

@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\ParticleAttractor.cs" />
      <Compile Include="Assets\Script\Bullet.cs" />
      <Compile Include="Assets\Script\Enemy\EnemyAI.cs" />
      <Compile Include="Assets\Script\Enemy\U_EQS_Query_EnemyLastLoc.cs" />
