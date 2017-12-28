@@ -2,26 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof( MobileInput))]
 public class CharMovement : MonoBehaviour {
 
-    public float CameraInterpSpeed = 0;
-    public GameObject MyParticle;
-    public float TPTime = 0.5f;
+    public float CameraInterpSpeed = 0;         // How fust camera will move(interp) from one point to another
+    public GameObject MyParticle;               // particle on spawn
+    public float TPTime = 0.5f;                 // How long tp will last by itself
 
     [HideInInspector]
-    public Vector3 MyLastLoc;
+    public Vector3 MyLastLoc;                   // basicly this one used by AI
 
     private float BetterTPTimer = 0f;
     private bool isBetterTP = false;
-    private Camera MyCamera;
-    private MobileInput MyMobileInput;
-    private Vector3 CameraPosition;
+    private Camera MyCamera;                    // Camera, to find point from the screen and interp it
+    private MobileInput MyMobileInput;          // mobile input to get know when and where to tp
+    private Vector3 CameraPosition;             // using for interpolate camera position (basicly just local variable)
 
-    private float VisibleTimer = 0f;
+    private float VisibleTimer = 0f;            // timer for count time in TP itself
 
     //private bool isLeft = false;
 
-    // Use this for initialization
+    // Checking if we have everything and filling some variables
     void Start () {
         MyMobileInput = GetComponent<MobileInput>();
         if (MyMobileInput == null)
@@ -35,7 +36,7 @@ public class CharMovement : MonoBehaviour {
             print("Out of camera (CharMovement)");
 
         CameraPosition = transform.position;
-        CameraPosition.z = 5f;
+        CameraPosition.z = -5f;
         MyCamera.transform.position = CameraPosition;
 
 
@@ -47,52 +48,60 @@ public class CharMovement : MonoBehaviour {
         // transform.position += Vector3.right * (isLeft ? -0.01f : 0.01f);
         // isLeft = !isLeft;
 
+        // Is we in TP now
         if (VisibleTimer > 0f)
         {
-
+            // if yes just reduse timer
             VisibleTimer -= Time.deltaTime;
 
         }
         else
         if (VisibleTimer < 0f)
         {
-
+            // but if we was in tp frame before and now it end we set timer in 0 (so first and second "if" will give false), and return us visible 
             VisibleTimer = 0f;
             ReturnVisible();
         }
 
         
-       
+       // if we in beter tp, reduse timer of it
         if (isBetterTP)
        {
            BetterTPTimer -= Time.deltaTime;
-           if(BetterTPTimer < 0)
+           if(BetterTPTimer < 0f)
            {
-               BetterTPTimer = 0;
+               BetterTPTimer = 0f;
                isBetterTP = false;
            }
        }
 
+        // if we has tap, then we want to tp..
         if(MyMobileInput.Tap)
         {
+            // because we will change our position in a moment, our position now will be our last position
             MyLastLoc = transform.position;
+            // and then tp to our position from mob.input
             GoToPosition( GetPositionFromScreen(MyMobileInput.LastPosition));
         }
 
+        // how much we need to interp
         float ToInterp = CameraInterpSpeed * Time.deltaTime;
 
+        // if more when 1 just set camera pos in our pos (or if camera speed 0)
         if (ToInterp > 1 || CameraInterpSpeed == 0)
             CameraPosition = transform.position;
         else
            CameraPosition = Vector3.Lerp( CameraPosition, transform.position, ToInterp);
 
-        CameraPosition.z = 5;
+        // seting camera pos back to -5, otherwize it will reduse from frame to frame
+        CameraPosition.z = -5;
 
+        // in the end just set camera position
         MyCamera.transform.position = CameraPosition;
     }
 
     
-
+    // because mobile inpup give us not location but point on the screen in pixels we need to transform it in actual position in world
     private Vector3 GetPositionFromScreen(Vector2 InScreenPos)
     {
         Vector3 MyVector = MyCamera.ScreenToWorldPoint(new Vector3(InScreenPos.x, InScreenPos.y, 0));
@@ -101,26 +110,30 @@ public class CharMovement : MonoBehaviour {
         return MyVector;
     }
 
+    // just set all variables back after end of tp
     private void ReturnVisible()
     {
 
         gameObject.GetComponent<SpriteRenderer>().enabled = true;
 
-        
-
         gameObject.layer = 12;
     }
 
+    // so I have a lot of explain here. 
     private bool GoToPosition(Vector2 InPosition)
     {
-        RaycastHit2D NewHit;
-        Vector2 MyOrigin = transform.position;
-        Vector2 InPosLocal;
 
+        
+        Vector2 MyOrigin = transform.position;
+        Vector2 InPosLocal;                         // this thing we need becouse we would adjust location on tp
+
+
+        // here we just spawn particle
         if(MyParticle != null)
         {
             GameObject MyPar = Instantiate(MyParticle,transform.position,transform.rotation);
             
+            // because of specific particle, we need set attractor
             ParticleAttractor MyAttractor = MyPar.GetComponent<ParticleAttractor>();
             if (MyAttractor != null)
                 MyAttractor.PointToAttract = transform;
@@ -128,54 +141,67 @@ public class CharMovement : MonoBehaviour {
 
 
 
-
+        // this how these variable need to act when we in tp
         GetComponent<SpriteRenderer>().enabled = false;
-
-        VisibleTimer = TPTime;
-
         gameObject.layer = 15;
+        // and reset tp timer
+        VisibleTimer = TPTime;
+        
 
-
+        // better tp men we can tp through soft walls, so we will use soft ray cast for that
         if (isBetterTP)
         {
-            List<RaycastHit2D> NewList;
 
+            // first of all we need to check is our possible finale location in something 
             bool CollRes = true;
-
             Collider2D MyColl = Physics2D.OverlapPoint(InPosition);
 
             if (MyColl != null)
                 if (MyColl.tag != transform.tag)
                     CollRes = false;
+            // if collRes false that is meen we pointing in something which is not our own char
 
-           
 
+            // after that we need to check soft ray (if it will gave false we will tp into strong wall)
+            List<RaycastHit2D> NewList;
+
+            // if coll res is true (not pointing in anything) and raycast gave false (so we didn't cross any strong wall or somethiing) we just tp in this position
             if (!SoftRayCast2D(MyOrigin, InPosition, out NewList) && CollRes)
                 InPosLocal = InPosition;
             else
-                InPosLocal = NewList[NewList.Count - 1].point + NewList[NewList.Count - 1].normal * 0.1f;
+                InPosLocal = NewList[NewList.Count - 1].point + NewList[NewList.Count - 1].normal * 0.1f; // but if we was pointing into something, or we cross some strong wall, we mast take last hit from raycast
            
 
             
 
         }
         else
-        { 
+        {
+            // if we don't use BT we want simple raycast, because it doesn't metter, we cant tp through anything
+            RaycastHit2D NewHit;
             NewHit = Physics2D.Raycast(MyOrigin, InPosition - MyOrigin, (InPosition - MyOrigin).magnitude);
             InPosLocal = NewHit ? NewHit.point + NewHit.normal * 0.1f : InPosition;
         }
+        
+        // after we tp we want to adjust our location if possible 
+
         RaycastHit2D[] NewRaycastHit = new RaycastHit2D[8];
 
         int Num = SphereHit(ref NewRaycastHit, InPosLocal, 2);
 
+        // if Num == 0, it's meen we didn't hit anything and we did not need to adjust collision
         if (Num > 0)
         {
             
             float Coeffition;
             Vector2 MyVector;
-            
+
+
+            // from every normal of each hit we have, we adjusting location on distance we need to not colliding with this wall (or some thing)
+            // P.S. all this system of adjusting very simplified and works only with circles
             for (int i = 0; i < Num; ++i)
             {
+               
                 MyVector = InPosLocal - NewRaycastHit[i].point;
 
                 Coeffition = Mathf.Abs(MyVector.x * NewRaycastHit[i].normal.x + MyVector.y * NewRaycastHit[i].normal.y);
@@ -183,16 +209,10 @@ public class CharMovement : MonoBehaviour {
                 InPosLocal += NewRaycastHit[i].normal * (2 - Coeffition);
             }
 
-            transform.position = InPosLocal;
-
-
-
-
-            return true;
         }
         
 
-        
+        // after all we just set our position
 
         transform.position = InPosLocal;
 
@@ -200,6 +220,7 @@ public class CharMovement : MonoBehaviour {
       
     }
 
+    // all this do is make 8 raycast in 360 deg., and record result in "Res"
     private int SphereHit(ref RaycastHit2D[] Res, Vector2 Point, float Radius)
     {
         int RetInt = 0;
@@ -235,40 +256,46 @@ public class CharMovement : MonoBehaviour {
         return RetInt;
     }
 
-
+    // just seting better tp
     public void MakeBetterTP(float InTime)
     {
         isBetterTP = true;
         BetterTPTimer = InTime;
     }
 
+
+    // raycast which can overlap "soft" walls
     private bool SoftRayCast2D(Vector2 Start, Vector2 End, out List<RaycastHit2D> OutHit)
     {
        
-
+        // seting up some variables
         OutHit = new List<RaycastHit2D>();
 
         RaycastHit2D LocalRayHit;
 
         Vector2 StartPos = Start;
   
-
+        
+        // we break only if.. 
         while (true)
         {
             LocalRayHit = Physics2D.Raycast(StartPos, End - StartPos, (End - StartPos).magnitude);
 
+            // raycast reach finale destination
             if (!LocalRayHit)
                 return false;
 
+            // ofcourse every hit must be in result
             OutHit.Add(LocalRayHit);
             
-
+            // or we hit not soft wall
             if (LocalRayHit.collider.gameObject.layer != 14)
                 return true;
 
+            // relocate start pos so next ray start incide soft wall
             StartPos = LocalRayHit.point;
 
-
+            // and in the end check for some bugs (what if something will go wrong)
             if (OutHit.Count > 30)
             {
                 print("Too much Hits!!!");

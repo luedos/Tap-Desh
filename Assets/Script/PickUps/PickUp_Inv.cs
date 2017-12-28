@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PickUp_Inv : MonoBehaviour
 {
-    public float InvinsibilityTime = 5f;
+    public float InvinsibilityTime = 5f;         // How long Inv will last
+    public int PointsOnTake = 3;                 // How many points it will give on pickup
 
     private bool isLeft = true;
 
@@ -16,7 +17,7 @@ public class PickUp_Inv : MonoBehaviour
         isLeft = !isLeft;
     }
 
-
+    // You know wtf here is going
         void OnTriggerEnter2D(Collider2D other)
     {
       
@@ -25,6 +26,7 @@ public class PickUp_Inv : MonoBehaviour
             HealthPoints OtherHP = other.gameObject.GetComponent<HealthPoints>();
             if(OtherHP != null)
             {
+                GameManager.Instance.IncreaseGamePoints(PointsOnTake);
                 OtherHP.MakeInvincible(InvinsibilityTime);
                 Destroy(gameObject);
             }

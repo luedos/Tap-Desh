@@ -6,21 +6,21 @@ public class CharShooting : MonoBehaviour {
 
 
     public GameObject BulletToShoot;
-    public float MaxLoad = 2;
-    public float TouchSensitivity = 0f;
-    public float LoadMultiplier = 1f;
-    public float MultiFireAngle = 20f;
+    public float MaxLoad = 2;                   // Max lvl we can load our bullet by holding touch on character
+    public float TouchSensitivity = 0f;         // in what radius from char we can tap so load will start (if = 0, you can touch in every radius)
+    public float LoadMultiplier = 1f;           // Load level per second
+    public float MultiFireAngle = 20f;          // angle between bullets (if where more then one will fire)
 
-    private bool IsDD = false;
-    private float DDTimer = 0f;
-    private Camera MyCamera;
-    private MobileInput MyMobileInput;
-    private bool LoadChar = false;
-    private float Load = 0f;
-    private int FireMultiplacator = 0;
+    private bool IsDD = false;                  // is double damage
+    private float DDTimer = 0f;  
+    private Camera MyCamera;                    // Camera, to find point from the screen 
+    private MobileInput MyMobileInput;          // mobile input to get know when and where to tp
+    private bool LoadChar = false;              // is we loading boolet
+    private float Load = 0f;                    // power of load on the moment
+    private int FireMultiplacator = 0;          // it's level of how many bullets will be on sides
 
 
-    // Use this for initialization
+    // simple check is every thing ok
     void Start () {
         MyMobileInput = GetComponent<MobileInput>();
 
@@ -33,9 +33,11 @@ public class CharShooting : MonoBehaviour {
             print("Out of camera  (CharShooting)");
     }
 	
-	// Update is called once per frame
+	
 	void Update () {
+    
         
+        // simple timer for DD
         if(IsDD)
         {
             DDTimer -= Time.deltaTime;
@@ -46,56 +48,56 @@ public class CharShooting : MonoBehaviour {
             }
         }
 
-        if (MyMobileInput.Tap)
-        {
-            ResetAll();
-        }
 
+        // we start to load on touch (if this touch was in radius)
         if (MyMobileInput.Touch)
         {
             if ((GetPositionFromScreen(MyMobileInput.StartPosition) - transform.position).magnitude < TouchSensitivity || TouchSensitivity == 0f)
                 LoadChar = true;
         }
         
+        // if we are loading..
         if (LoadChar)
         {
+
+            // we increase load lvl till max
             if (Load < MaxLoad)
                 Load += Time.deltaTime * LoadMultiplier;
             else if (Load > MaxLoad)
                 Load = MaxLoad;
 
+            // and change color to more red (reduse green and blue)
             GetComponent<SpriteRenderer>().color = new Color(1 + Load, (MaxLoad - Load) / MaxLoad, (MaxLoad - Load) / MaxLoad);
 
         }
 
+        // if we swiped in time when we are loading..
         if (MyMobileInput.Swipe && LoadChar)
         {
+            // we finding direction to spawn ( and rotation)
             Vector3 StartVector = GetPositionFromScreen(MyMobileInput.LastPosition)- transform.position;
-
             Quaternion SpawnQuat = Quaternion.FromToRotation(Vector3.up, StartVector);
             
             StartVector = StartVector.normalized * 2f + transform.position;
 
+            // Fire first bullet
             Fire(StartVector, SpawnQuat);
-
-
-
-
+            
+            // and if multiplacator more than one we spawn rest
             if (FireMultiplacator > 0)
             {
+                // by this furmula we finding exact number of bullets on sides of fire direction
                 int ForLength = FireMultiplacator > 2 ? FireMultiplacator * 4 - 4 : FireMultiplacator * 2;
+
+                // basicly works like ping pong, spawning bullets from center (just accept it)
                 for (int i = 1; i < ForLength + 1; ++i)
                 {
                     float SpawnAngleZ = Quaternion.FromToRotation(Vector3.up, StartVector - transform.position).eulerAngles.z;
 
                     SpawnAngleZ += MultiFireAngle * (i % 2 == 0 ? (-1f) : 1f) * ((i + 1) / 2);
 
-
-
                     if (SpawnAngleZ < 0)
                         SpawnAngleZ += 360;
-
-                    print(SpawnAngleZ);
 
                     Vector3 VectorToSpawn = new Vector3();
 
@@ -108,16 +110,19 @@ public class CharShooting : MonoBehaviour {
                 }
             }
 
+            // after we fire reset all variables
             ResetAll();
         }
 
-      
-        if ((!MyMobileInput.IsDraging && LoadChar)|| MyMobileInput.Tap)
+        // Tap meen it's not swipe, so we didn't shoot, but start to load, so we want reset everything
+        // about "!MyMobileInput.IsDraging && LoadChar" that meen what we are not draging, but still loading somewhy, because of that we want reset all
+        if ((!MyMobileInput.IsDraging && LoadChar) || MyMobileInput.Tap)
         {
             ResetAll();
         }
     }
 
+    // because mobile inpup give us not location but point on the screen in pixels we need to transform it in actual position in world
     private Vector3 GetPositionFromScreen(Vector2 InScreenPos)
     {
         Vector3 MyVector = MyCamera.ScreenToWorldPoint(new Vector3(InScreenPos.x, InScreenPos.y, 0));
@@ -126,6 +131,7 @@ public class CharShooting : MonoBehaviour {
         return MyVector;
     }
 
+    // just reseting all needed variables after we shoot
     void ResetAll()
     {
         Load = 0f;
@@ -134,12 +140,14 @@ public class CharShooting : MonoBehaviour {
         GetComponent<SpriteRenderer>().color = Color.white;
     }
 
+    // set up DD
     public void MakeDD(float InTime)
     {
         IsDD = true;
         DDTimer = InTime;
     }
 
+    // simple fire one bullet
     private void Fire(Vector3 SpawnVector, Quaternion SpawnQuat)
     {
         GameObject MyBullet = null;
@@ -160,6 +168,7 @@ public class CharShooting : MonoBehaviour {
         }
     }
 
+    // here we can change fire multiplicator by some rules
     public void SetFireMultOnLevel(int InLevel)
     {
         switch (InLevel)

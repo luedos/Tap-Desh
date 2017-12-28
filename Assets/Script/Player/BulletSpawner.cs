@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class BulletSpawner : MonoBehaviour {
 
-    public GameObject BulletToShoot;
-    public Transform ShootPoint;
-    public float ShootDelay = 0f;
-    public float ShootTimeRange = 0f;
+    public GameObject BulletToShoot;            // This thing buller will spawn
+    public Transform ShootPoint;                // in which point buller will shoot (because it easier on editor)
+    public float ShootDelay = 0f;               // Basicly rate of fire
+    public float ShootTimeRange = 0f;           // Can use for some random in shoot delay
     public bool SpawnOnBegin = false;
     public string BulletTag = "Player";
     public int BulletLayer = 9;
@@ -23,19 +23,22 @@ public class BulletSpawner : MonoBehaviour {
             StartSpawn();
 	}
 	
-	// Update is called once per frame
+	// push timer forward..
 	void Update () {
 		if(isSpawn)
         {
             Timer += Time.deltaTime;
+            // and when timer reach end..
             if(Timer >= NowMaxTimer)
             {
+                // we spawn bullet and reload timer
                 SpawnBullet();
                 StartSpawn();
             }
         }
 	}
 
+    // reload timer
     public void StartSpawn()
     {
         isSpawn = true;
@@ -43,8 +46,11 @@ public class BulletSpawner : MonoBehaviour {
         NowMaxTimer = ShootDelay + Random.Range(-ShootTimeRange, ShootTimeRange);
     }
 
+    // stop timer
     public void EndSpawn() { isSpawn = false; }
 
+
+    // Simply spawn bullet
     public void SpawnBullet()
     {
         GameObject MyBullet = null;

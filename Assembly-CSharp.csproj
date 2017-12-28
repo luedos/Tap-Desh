@@ -51,14 +51,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\HUDScript.cs" />
      <Compile Include="Assets\ParticleAttractor.cs" />
      <Compile Include="Assets\Script\Bullet.cs" />
      <Compile Include="Assets\Script\Enemy\EnemyAI.cs" />
+     <Compile Include="Assets\Script\Enemy\U_EQS_Query_EnemyIdleCenter.cs" />
      <Compile Include="Assets\Script\Enemy\U_EQS_Query_EnemyLastLoc.cs" />
      <Compile Include="Assets\Script\Enemy\U_EQS_Query_EnemyLoc.cs" />
+     <Compile Include="Assets\Script\GameManager.cs" />
+     <Compile Include="Assets\Script\GameOverScreen.cs" />
+     <Compile Include="Assets\Script\GameStats.cs" />
+     <Compile Include="Assets\Script\HUDPointerScript.cs" />
+     <Compile Include="Assets\Script\MainMenuUI.cs" />
      <Compile Include="Assets\Script\PickUps\PickUp_BT.cs" />
      <Compile Include="Assets\Script\PickUps\PickUp_DD.cs" />
      <Compile Include="Assets\Script\PickUps\PickUp_FM.cs" />
+     <Compile Include="Assets\Script\PickUps\PickUp_HP.cs" />
      <Compile Include="Assets\Script\PickUps\PickUp_Inv.cs" />
      <Compile Include="Assets\Script\Player\BulletSpawner.cs" />
      <Compile Include="Assets\Script\Player\CharMovement.cs" />
@@ -66,6 +74,7 @@
      <Compile Include="Assets\Script\Player\HealthPoints.cs" />
      <Compile Include="Assets\Script\Player\MobileInput.cs" />
      <Compile Include="Assets\Script\ReflectBullets.cs" />
+     <Compile Include="Assets\Script\Spawner.cs" />
      <Compile Include="Assets\Script\U_EQS\U_EQS_DistanceTest.cs" />
      <Compile Include="Assets\Script\U_EQS\U_EQS_G_Grid.cs" />
      <Compile Include="Assets\Script\U_EQS\U_EQS_Generator.cs" />

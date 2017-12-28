@@ -8,6 +8,9 @@ public class MobileInput : MonoBehaviour {
     public float TapTimeSensitivity = 0.2f;
     public float TapRadialSensitivity = 40f;
 
+    [HideInInspector]
+    public bool BlockInput = false;
+
     private Camera MyCamera;
     private bool tap, touch, swipe, turn;
     private Vector2 startTouch, deltaTouch, lastPosition;
@@ -45,8 +48,12 @@ public class MobileInput : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+
+
         tap = touch = swipe = turn = false;
 
+        if (BlockInput)
+            return;
 
         // for tap (if we relese finger/mouse and timer is not run out this is Tap)
         if (isDraging)

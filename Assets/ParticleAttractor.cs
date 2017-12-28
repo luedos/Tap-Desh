@@ -26,6 +26,7 @@ public class ParticleAttractor : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+
         if(StartTime > 0)
         {
             StartTime -= Time.deltaTime;
@@ -34,6 +35,9 @@ public class ParticleAttractor : MonoBehaviour {
 
         transform.position += Vector3.right * (isLeft ? -0.001f : 0.001f);
         isLeft = !isLeft;
+
+        if (PointToAttract == null)
+            Destroy(gameObject);
 
         int ParCount = MyParticleSystem.particleCount;
 
