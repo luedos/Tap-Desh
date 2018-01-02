@@ -90,13 +90,7 @@ public class GameManager : MonoBehaviour {
         Char = GameObject.FindGameObjectWithTag("Player");
     }
 	
-	// Update is called once per frame
-	void Update () {
-     
 
-
-        
-    }
 
     void SpawnBonus()
     {
@@ -139,6 +133,11 @@ public class GameManager : MonoBehaviour {
                 Destroy(Enemies[i]);
         }
 
+        GameObject[] MyBonuses = GameObject.FindGameObjectsWithTag("Bonus");
+
+        for (int i = 0; i < MyBonuses.Length; ++i)
+            Destroy(MyBonuses[i]);
+
         Spawner[] MySpawners = GameObject.FindObjectsOfType<Spawner>();
 
         int SpawnNum = MySpawners.Length;
@@ -146,11 +145,14 @@ public class GameManager : MonoBehaviour {
         for (int i = 0; i < SpawnNum; ++i)
             MySpawners[i].RefreshSpawner();
 
+        myHUD.GetComponent<HUDScript>().ResetBonuses();
+
         myHUD.SetActive(true);
         myGameOverScreen.SetActive(false);
 
         MainChar.GetComponent<HealthPoints>().MakeAllive();
         MainChar.transform.position = BeginTransform.position;
+
 
     }
 

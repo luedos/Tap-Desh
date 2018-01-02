@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 114575514406535620}
   - component: {fileID: 58051397577989482}
   - component: {fileID: 114194712042072114}
-  - component: {fileID: 114716981430421564}
+  - component: {fileID: 114691840789423104}
   m_Layer: 12
   m_Name: Char
   m_TagString: Player
@@ -70,7 +70,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1272332172257360}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.4, y: 15.8, z: 0}
+  m_LocalPosition: {x: 0.5, y: 10.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4210872777727520}
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BulletToShoot: {fileID: 1623738744668890, guid: bc508da3205c3844eb9871be768bd306,
     type: 2}
-  MaxLoad: 2
+  MaxLoad: 1
   TouchSensitivity: 10
   LoadMultiplier: 2
   MultiFireAngle: 10
@@ -165,6 +165,7 @@ MonoBehaviour:
   SwipeSensitivity: 120
   TapTimeSensitivity: 0.2
   TapRadialSensitivity: 40
+  BlockInput: 0
 --- !u!114 &114575514406535620
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -179,8 +180,9 @@ MonoBehaviour:
   CameraInterpSpeed: 12
   MyParticle: {fileID: 1209545600571120, guid: 9f4f8993e9abf1b49b5776362947b752, type: 2}
   TPTime: 0.3
+  WalkThroughLayers: 090000000a0000000b0000000f0000001000000011000000
   MyLastLoc: {x: 0, y: 0, z: 0}
---- !u!114 &114716981430421564
+--- !u!114 &114691840789423104
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -188,13 +190,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1272332172257360}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7419648b87cc8a244ad9df2937b85969, type: 3}
+  m_Script: {fileID: 11500000, guid: 5c85508ce86b0d942b1938210cc55a81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 3
-  PointsForDeath: 13
-  DestroyAfterDeath: 0
-  TimeBeforDestroy: 1
+  MaxHP: 5
 --- !u!124 &124108526051222712
 Behaviour:
   m_ObjectHideFlags: 1

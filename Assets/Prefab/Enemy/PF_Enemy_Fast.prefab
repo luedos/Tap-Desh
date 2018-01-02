@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 114784420696414522}
   - component: {fileID: 114971974848365774}
   - component: {fileID: 114078494657831348}
-  - component: {fileID: 114928124335682240}
+  - component: {fileID: 114059826971925482}
   m_Layer: 11
   m_Name: PF_Enemy_Fast
   m_TagString: Enemy
@@ -212,7 +212,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 20
+  m_Radius: 35
 --- !u!58 &58616270316439868
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -289,6 +289,21 @@ MonoBehaviour:
   MyQuery: {fileID: 114400113891047078}
   ForVisibility: 1
   ForTag: NONE
+--- !u!114 &114059826971925482
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1200429543301362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1516ed7d7e9163549ab9ee75408c24bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHP: 1
+  PointsForDeath: 15
+  DestroyAfterDeath: 1
+  TimeBeforDestroy: 0
 --- !u!114 &114078494657831348
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -381,13 +396,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IdleCenter: {x: 0, y: 0, z: 0}
-  InvisibleLayers: 090000000a000000
+  InvisibleLayers: 090000000a0000000b0000000f0000001000000011000000
   Bullet: {fileID: 1025592746945744, guid: 58a7f474981cf7f45ae83428e03e8ddb, type: 2}
-  FireRate: 1.5
+  FireRate: 2
   NumOfBullet: 1
   DeltaAngleOfFire: 20
-  TPDistance: 20
-  TPRate: 2
+  TPDistance: 30
+  TPRate: 1.2
   Perception: {fileID: 58466177387726336}
   FireSpotGenerator: {fileID: 114456835220687922}
   SearchSpotGenerator: {fileID: 114031589753110898}
@@ -528,21 +543,6 @@ MonoBehaviour:
   MinDistance: 10
   MaxDistance: 20
   MyValueGraphic: 1
---- !u!114 &114928124335682240
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1200429543301362}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7419648b87cc8a244ad9df2937b85969, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHP: 3
-  PointsForDeath: 10
-  DestroyAfterDeath: 1
-  TimeBeforDestroy: 0
 --- !u!114 &114967182607407066
 MonoBehaviour:
   m_ObjectHideFlags: 1

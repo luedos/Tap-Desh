@@ -37,8 +37,10 @@ public class ParticleAttractor : MonoBehaviour {
         isLeft = !isLeft;
 
         if (PointToAttract == null)
+        {
             Destroy(gameObject);
-
+            return;
+        }
         int ParCount = MyParticleSystem.particleCount;
 
         MyPar = new ParticleSystem.Particle[ParCount];

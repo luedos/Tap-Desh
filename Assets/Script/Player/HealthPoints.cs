@@ -11,17 +11,10 @@ public class HealthPoints : MonoBehaviour {
     public delegate void SimpleDelegate();
     public List<SimpleDelegate> DamageTaken = new List<SimpleDelegate>();
 
-    [Tooltip("Needed only for enemy")]
-    public int PointsForDeath = 13;                 // how many points we will recive on enemy killing
-
-    public bool DestroyAfterDeath = true;           // When owner is die, want you to destroy it, or just make invisible without collision
-    [Tooltip("How many time will pass after death, before owner will be destroy (only if DestroyAfterDeath = true)")]
-    public float TimeBeforDestroy = 1f;
-
 
     private bool isDead = false;
-    private float InvinsibilityTimer = 0f;
-    private bool isInvincible = false;
+    protected float InvinsibilityTimer = 0f;
+    protected bool isInvincible = false;
     private int hp = 0;
     private int startLayer;
 
@@ -29,7 +22,7 @@ public class HealthPoints : MonoBehaviour {
     public bool IsDead { get { return isDead; } }
 
     // call evere method which subscribe on it (also if can't call some method we deleting them)
-    void CallHPSubs()
+    protected void CallHPSubs()
     {
         for (int i = 0; i < DamageTaken.Count; ++i)
         {
@@ -44,7 +37,7 @@ public class HealthPoints : MonoBehaviour {
     }
 
     // seting our actual HP
-    void Start()
+    public virtual void Start()
     {
         hp = MaxHP;
         startLayer = gameObject.layer;
@@ -64,24 +57,9 @@ public class HealthPoints : MonoBehaviour {
         // and if our health is less then we can survive we destroing ourself
         if (hp <= 0f)
         {
-            isDead = true;
-
-            if (tag == "Enemy")
-                GameManager.Instance.IncreaseGamePoints(PointsForDeath);
+            Death();
 
 
-            GetComponent<SpriteRenderer>().enabled = false;
-            gameObject.layer = 16;                                  // IgnoreAll layer
-
-            if(DestroyAfterDeath)
-                Destroy(gameObject,TimeBeforDestroy);
-
-            if (tag == "Player")
-                GameManager.Instance.GameOver();
-
-            MobileInput MyMI = GetComponent<MobileInput>();
-            if (MyMI != null)
-                MyMI.BlockInput = true;
         }
 
 
@@ -115,11 +93,32 @@ public class HealthPoints : MonoBehaviour {
 
         
     }
+
+    protected virtual void Death()
+    {
+        GetComponent<SpriteRenderer>().enabled = false;
+        gameObject.layer = 16;                                  // IgnoreAll layer
+
+        isDead = true;
+    }
     // set up invincibility
     public void MakeInvincible(float OnTime)
     {
+        if(OnTime == 0f)
+        {
+            if(isInvincible)
+            {
+                InvinsibilityTimer = 0f;
+                isInvincible = false;
+                GameManager.Instance.myHUD.GetComponent<HUDScript>().AddBonusIcon_Inv(0f);
+            }
+
+            return;
+        }
+
         InvinsibilityTimer = OnTime;
         isInvincible = true;
+        GameManager.Instance.myHUD.GetComponent<HUDScript>().AddBonusIcon_Inv(OnTime);
     }
 
     // basicly if we hit bullet but we are invinsible we will reflect it
@@ -149,7 +148,7 @@ public class HealthPoints : MonoBehaviour {
         }
     }
 
-    public void MakeAllive()
+    public virtual void MakeAllive()
     {
         if(isDead)
         {
@@ -161,10 +160,6 @@ public class HealthPoints : MonoBehaviour {
             hp = MaxHP;
 
             CallHPSubs();
-
-            MobileInput MyMI = GetComponent<MobileInput>();
-            if (MyMI != null)
-                MyMI.BlockInput = false;
 
             isDead = false;
         }

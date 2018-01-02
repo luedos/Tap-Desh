@@ -9,6 +9,8 @@ public class CharMovement : MonoBehaviour {
     public GameObject MyParticle;               // particle on spawn
     public float TPTime = 0.5f;                 // How long tp will last by itself
 
+    public int[] WalkThroughLayers;
+
     [HideInInspector]
     public Vector3 MyLastLoc;                   // basicly this one used by AI
 
@@ -146,43 +148,31 @@ public class CharMovement : MonoBehaviour {
         gameObject.layer = 15;
         // and reset tp timer
         VisibleTimer = TPTime;
-        
-
-        // better tp men we can tp through soft walls, so we will use soft ray cast for that
-        if (isBetterTP)
-        {
-
-            // first of all we need to check is our possible finale location in something 
-            bool CollRes = true;
-            Collider2D MyColl = Physics2D.OverlapPoint(InPosition);
-
-            if (MyColl != null)
-                if (MyColl.tag != transform.tag)
-                    CollRes = false;
-            // if collRes false that is meen we pointing in something which is not our own char
 
 
-            // after that we need to check soft ray (if it will gave false we will tp into strong wall)
-            List<RaycastHit2D> NewList;
 
-            // if coll res is true (not pointing in anything) and raycast gave false (so we didn't cross any strong wall or somethiing) we just tp in this position
-            if (!SoftRayCast2D(MyOrigin, InPosition, out NewList) && CollRes)
-                InPosLocal = InPosition;
-            else
-                InPosLocal = NewList[NewList.Count - 1].point + NewList[NewList.Count - 1].normal * 0.1f; // but if we was pointing into something, or we cross some strong wall, we mast take last hit from raycast
-           
+
+        // first of all we need to check is our possible finale location in something 
+        bool CollRes = true;
+        Collider2D MyColl = Physics2D.OverlapPoint(InPosition);
+
+        if (MyColl != null)
+            if (MyColl.tag != transform.tag)
+                CollRes = false;
+        // if collRes false that is meen we pointing in something which is not our own char
+
+
+        // after that we need to check soft ray (if it will gave false we will tp into strong wall)
+        List<RaycastHit2D> NewList;
+
+        // if coll res is true (not pointing in anything) and raycast gave false (so we didn't cross any strong wall or somethiing) we just tp in this position
+        if (!SoftRayCast2D(MyOrigin, InPosition, out NewList) && CollRes)
+            InPosLocal = InPosition;
+        else
+            InPosLocal = NewList[NewList.Count - 1].point + NewList[NewList.Count - 1].normal * 0.1f; // but if we was pointing into something, or we cross some strong wall, we mast take last hit from raycast
 
             
 
-        }
-        else
-        {
-            // if we don't use BT we want simple raycast, because it doesn't metter, we cant tp through anything
-            RaycastHit2D NewHit;
-            NewHit = Physics2D.Raycast(MyOrigin, InPosition - MyOrigin, (InPosition - MyOrigin).magnitude);
-            InPosLocal = NewHit ? NewHit.point + NewHit.normal * 0.1f : InPosition;
-        }
-        
         // after we tp we want to adjust our location if possible 
 
         RaycastHit2D[] NewRaycastHit = new RaycastHit2D[8];
@@ -259,8 +249,22 @@ public class CharMovement : MonoBehaviour {
     // just seting better tp
     public void MakeBetterTP(float InTime)
     {
+        if(InTime == 0f)
+        {
+            if(isBetterTP)
+            {
+                isBetterTP = false;
+                BetterTPTimer = 0f;
+                GameManager.Instance.myHUD.GetComponent<HUDScript>().AddBonusIcon_BT(0f);
+
+            }
+
+            return;
+        }
+
         isBetterTP = true;
         BetterTPTimer = InTime;
+        GameManager.Instance.myHUD.GetComponent<HUDScript>().AddBonusIcon_BT(InTime);
     }
 
 
@@ -287,9 +291,24 @@ public class CharMovement : MonoBehaviour {
 
             // ofcourse every hit must be in result
             OutHit.Add(LocalRayHit);
-            
+
             // or we hit not soft wall
-            if (LocalRayHit.collider.gameObject.layer != 14)
+            bool findLayer = false;
+
+
+            if (isBetterTP && LocalRayHit.transform.gameObject.layer == 14)
+                findLayer = true;
+            else
+                for (int i = 0; i < WalkThroughLayers.Length; ++i)
+                {
+                    if (WalkThroughLayers[i] == LocalRayHit.transform.gameObject.layer)
+                    {
+                        findLayer = true;
+                        break;
+                    }
+                }
+
+            if (!findLayer)
                 return true;
 
             // relocate start pos so next ray start incide soft wall

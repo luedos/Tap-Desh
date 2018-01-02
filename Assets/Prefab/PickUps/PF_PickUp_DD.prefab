@@ -23,9 +23,9 @@ GameObject:
   - component: {fileID: 50777228276358684}
   - component: {fileID: 58514994316650622}
   - component: {fileID: 114420661399468974}
-  m_Layer: 2
+  m_Layer: 17
   m_Name: PF_PickUp_DD
-  m_TagString: Untagged
+  m_TagString: Bonus
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f5c29dacdd87e84c9e27cbc65ec25bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DDTime: 5
+  DDTime: 10
   PointsOnTake: 4
 --- !u!212 &212614672794042008
 SpriteRenderer:

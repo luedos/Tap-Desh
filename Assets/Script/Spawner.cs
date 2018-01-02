@@ -29,12 +29,18 @@ public class Spawner : MonoBehaviour {
     private float Timer = 0f;
     private bool bSpawnByTimer = false;
 
-	// Use this for initialization
-	void Start () {
-        if (SpawnTimer > 0f && SpawnOnCreate)
-            bSpawnByTimer = true;
-	}
-
+    // Use this for initialization
+    void Start()
+    {
+        if (SpawnTimer > 0f)
+        {
+            if (SpawnOnCreate)
+                bSpawnByTimer = true;
+        }
+        else
+            if (SpawnOnCreate)
+            SpawnObjects();
+    }
     bool ChooseObject(out GameObject OutObject)
     {
         if (MyChanceObjects.Length == 0)

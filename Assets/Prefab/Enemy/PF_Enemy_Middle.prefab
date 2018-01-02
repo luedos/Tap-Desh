@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 114569991545022184}
   - component: {fileID: 114487186558306120}
   - component: {fileID: 114107092655945602}
-  - component: {fileID: 114104786828127378}
+  - component: {fileID: 114566438340778270}
   m_Layer: 11
   m_Name: PF_Enemy_Middle
   m_TagString: Enemy
@@ -212,7 +212,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 20
+  m_Radius: 40
 --- !u!58 &58915604609419822
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -247,21 +247,6 @@ MonoBehaviour:
   MinDistance: 10
   MaxDistance: 20
   MyValueGraphic: 1
---- !u!114 &114104786828127378
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1496439604620918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7419648b87cc8a244ad9df2937b85969, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHP: 3
-  PointsForDeath: 15
-  DestroyAfterDeath: 1
-  TimeBeforDestroy: 0
 --- !u!114 &114107092655945602
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -442,6 +427,21 @@ MonoBehaviour:
   DrawPointOnFindTime: 3
   SideRange: 15
   DotDistanse: 3
+--- !u!114 &114566438340778270
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1496439604620918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1516ed7d7e9163549ab9ee75408c24bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHP: 1
+  PointsForDeath: 20
+  DestroyAfterDeath: 1
+  TimeBeforDestroy: 0
 --- !u!114 &114569991545022184
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -484,12 +484,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IdleCenter: {x: 0, y: 0, z: 0}
-  InvisibleLayers: 090000000a000000
+  InvisibleLayers: 090000000a0000000b0000000f0000001000000011000000
   Bullet: {fileID: 1025592746945744, guid: 58a7f474981cf7f45ae83428e03e8ddb, type: 2}
   FireRate: 2.5
   NumOfBullet: 1
   DeltaAngleOfFire: 20
-  TPDistance: 15
+  TPDistance: 20
   TPRate: 3
   Perception: {fileID: 58194001268018796}
   FireSpotGenerator: {fileID: 114510527837200108}

@@ -23,9 +23,9 @@ GameObject:
   - component: {fileID: 50558937708086450}
   - component: {fileID: 58179637237356980}
   - component: {fileID: 114018357044399768}
-  m_Layer: 2
+  m_Layer: 17
   m_Name: PF_PickUp_FM
-  m_TagString: Untagged
+  m_TagString: Bonus
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

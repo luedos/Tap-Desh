@@ -143,8 +143,21 @@ public class CharShooting : MonoBehaviour {
     // set up DD
     public void MakeDD(float InTime)
     {
+        if (InTime == 0f)
+        {
+            if (IsDD)
+            {
+                DDTimer = 0f;
+                IsDD = false;
+                GameManager.Instance.myHUD.GetComponent<HUDScript>().AddBonusIcon_DD(0f);
+                
+            }
+            return;
+        }
+
         IsDD = true;
         DDTimer = InTime;
+        GameManager.Instance.myHUD.GetComponent<HUDScript>().AddBonusIcon_DD(InTime);
     }
 
     // simple fire one bullet
@@ -159,10 +172,11 @@ public class CharShooting : MonoBehaviour {
 
         if (MyBullet != null)
         {
-            float LoadLvl = IsDD ? (1 + Load) * 2 : 1 + Load;
-            MyBullet.GetComponent<Bullet>().SetLoadLevel(LoadLvl);
             if (IsDD)
                 MyBullet.GetComponent<Bullet>().BulletSpeed *= 2;
+
+            float LoadLvl = IsDD ? (1 + Load) * 2 : 1 + Load;
+            MyBullet.GetComponent<Bullet>().SetLoadLevel(LoadLvl);
             MyBullet.GetComponent<Bullet>().Tag = "Enemy";
             MyBullet.layer = 10;
         }
@@ -176,13 +190,19 @@ public class CharShooting : MonoBehaviour {
             case -1:
                 {
                     if (FireMultiplacator > 0)
+                    {
                         --FireMultiplacator;
+                        GameManager.Instance.myHUD.GetComponent<HUDScript>().AddBonusIcon_FM(-1);
+                    }
                     break;
                 }
             case 5:
                 {
                     if (FireMultiplacator < 5)
+                    {
+                        GameManager.Instance.myHUD.GetComponent<HUDScript>().AddBonusIcon_FM(1);
                         ++FireMultiplacator;
+                    }
                     break;
                 }
 
@@ -190,6 +210,9 @@ public class CharShooting : MonoBehaviour {
                 {
                     if (InLevel > -1 && InLevel < 5)
                         FireMultiplacator = InLevel;
+
+                    if(InLevel==0)
+                        GameManager.Instance.myHUD.GetComponent<HUDScript>().AddBonusIcon_FM(0);
                     break;
                 }
         }
