@@ -50,13 +50,12 @@ public class CharShooting : MonoBehaviour {
 
 
         // we start to load on touch (if this touch was in radius)
-        if (MyMobileInput.Touch)
-        {
-            if ((GetPositionFromScreen(MyMobileInput.StartPosition) - transform.position).magnitude < TouchSensitivity || TouchSensitivity == 0f)
-                LoadChar = true;
+        if (MyMobileInput.Touch && !LoadChar)
+        {            
+            LoadChar = true;
         }
         
-        // if we are loading..
+        
         if (LoadChar)
         {
 
@@ -71,10 +70,12 @@ public class CharShooting : MonoBehaviour {
 
         }
 
-        // if we swiped in time when we are loading..
-        if (MyMobileInput.Swipe && LoadChar)
+
+
+        // We fire if we swiped or long tap
+        if ((MyMobileInput.Swipe && LoadChar) || MyMobileInput.LongTap)
         {
-            // we finding direction to spawn ( and rotation)
+            
             Vector3 StartVector = GetPositionFromScreen(MyMobileInput.LastPosition)- transform.position;
             Quaternion SpawnQuat = Quaternion.FromToRotation(Vector3.up, StartVector);
             
@@ -110,7 +111,7 @@ public class CharShooting : MonoBehaviour {
                 }
             }
 
-            // after we fire reset all variables
+            
             ResetAll();
         }
 

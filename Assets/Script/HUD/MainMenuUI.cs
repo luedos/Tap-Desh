@@ -20,6 +20,16 @@ public class MainMenuUI : MonoBehaviour {
         SceneManager.LoadScene(1);
     }
 
+    public void StartLvl1()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    public void StartLvl2()
+    {
+        SceneManager.LoadScene(2);
+    }
+
     public void GoQuit()
     {
         Application.Quit();

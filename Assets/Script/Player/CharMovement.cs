@@ -80,25 +80,20 @@ public class CharMovement : MonoBehaviour {
         // if we has tap, then we want to tp..
         if(MyMobileInput.Tap)
         {
-            // because we will change our position in a moment, our position now will be our last position
+            
             MyLastLoc = transform.position;
-            // and then tp to our position from mob.input
             GoToPosition( GetPositionFromScreen(MyMobileInput.LastPosition));
         }
 
-        // how much we need to interp
+       // interpolation of camera position to our position
         float ToInterp = CameraInterpSpeed * Time.deltaTime;
-
-        // if more when 1 just set camera pos in our pos (or if camera speed 0)
+       
         if (ToInterp > 1 || CameraInterpSpeed == 0)
             CameraPosition = transform.position;
         else
            CameraPosition = Vector3.Lerp( CameraPosition, transform.position, ToInterp);
 
-        // seting camera pos back to -5, otherwize it will reduse from frame to frame
         CameraPosition.z = -5;
-
-        // in the end just set camera position
         MyCamera.transform.position = CameraPosition;
     }
 

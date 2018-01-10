@@ -120,6 +120,7 @@ public class GameManager : MonoBehaviour {
 
     public void NewGame()
     {
+        
         gamePoints = 0;
         Level = 0;
 
@@ -158,6 +159,7 @@ public class GameManager : MonoBehaviour {
 
     public void GoMainMenu()
     {
+       
         SceneManager.LoadScene(0);
     }
 }

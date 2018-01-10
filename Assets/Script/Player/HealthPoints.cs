@@ -46,29 +46,21 @@ public class HealthPoints : MonoBehaviour {
     // on damage taken
     public void DoDamage(int Damage)
     {
-        // if we are not invincible we recive damage
+        
         if(!isInvincible)
             hp -= Damage;
 
-
         CallHPSubs();
-
-
-        // and if our health is less then we can survive we destroing ourself
+        
         if (hp <= 0f)
-        {
             Death();
-
-
-        }
-
 
     }
 
     // siply regen hp
     public void RegenHP(int InHP)
     {
-        // if there is more then we need we set it as max
+        
         hp += InHP;
         if (hp > MaxHP)
             hp = MaxHP;
@@ -148,6 +140,7 @@ public class HealthPoints : MonoBehaviour {
         }
     }
 
+    // Return all variables on defoult from death state
     public virtual void MakeAllive()
     {
         if(isDead)

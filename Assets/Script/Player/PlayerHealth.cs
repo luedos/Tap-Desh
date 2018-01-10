@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class PlayerHealth : HealthPoints {
 
+    
     protected override void Death()
-    {    
+    {
+        // making all bonuses dissapiar on death
+
         MobileInput MyMI = GetComponent<MobileInput>();
         if (MyMI != null)
             MyMI.BlockInput = true;
@@ -24,6 +27,7 @@ public class PlayerHealth : HealthPoints {
         if (isInvincible)
             MakeInvincible(0f);
 
+                
         GameManager.Instance.GameOver();
 
         base.Death();

@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class MobileInput : MonoBehaviour {
 
-    public float SwipeSensitivity = 125f;
-    public float TapTimeSensitivity = 0.2f;
-    public float TapRadialSensitivity = 40f;
+    public float SwipeSensitivity = 125f;                       // how far in pixels you need to drag finger for fire swipe
+    public float TapTimeSensitivity = 0.2f;                     // in which amount of time you need to release finger to make Tap (longer will be long Tap)
+    public float TapRadialSensitivity = 40f;                    // in which radius from touch point tap will not fire
+    
 
     [HideInInspector]
     public bool BlockInput = false;
 
     private Camera MyCamera;
-    private bool tap, touch, swipe, turn;
+    private bool tap, touch, swipe, turn, longTap;
     private Vector2 startTouch, deltaTouch, lastPosition;
     private bool isDraging = false;
     private float TapTimer = 0f;
@@ -28,6 +29,7 @@ public class MobileInput : MonoBehaviour {
     public bool Swipe { get { return swipe; } }
     public bool Turn { get { return turn; } }
     public bool IsDraging { get { return isDraging; } }
+    public bool LongTap { get { return longTap; } }
 
     public void Start()
     {
@@ -37,6 +39,7 @@ public class MobileInput : MonoBehaviour {
             print("Out of camera  (Mobile Input)");
     }
 
+    // reseting system on state befor touch
     private void Reset()
     {
         TapTimer = 0f;
@@ -45,51 +48,60 @@ public class MobileInput : MonoBehaviour {
         LastTurnIndex = 0;
     }
 
-	// Update is called once per frame
-	void Update ()
+    void Update()
     {
 
-
-        tap = touch = swipe = turn = false;
+        tap = touch = swipe = turn = longTap = false;
 
         if (BlockInput)
             return;
 
-        // for tap (if we relese finger/mouse and timer is not run out this is Tap)
-        if (isDraging)
-            TapTimer += Time.deltaTime;
-
+        if (TapTimer > 0f)
+            TapTimer -= Time.deltaTime;
 
         // Input for mouse
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
+            if (TapTimer == 0f)
+                TapTimer = TapTimeSensitivity;
+        
             startTouch = Input.mousePosition;
             touch = true;
             isDraging = true;
-
+        
             CenterTurnVector = MyCamera.WorldToScreenPoint(transform.position);
-          
+        
             StartTurnVector = Quaternion.FromToRotation(Vector3.up, (startTouch - CenterTurnVector)).eulerAngles;
         }
-        else if(Input.GetMouseButtonUp(0))
+        else if (Input.GetMouseButtonUp(0)) // on release finger
         {
             lastPosition = Input.mousePosition;
 
-            if (TapTimer < TapTimeSensitivity && isDraging && (lastPosition - startTouch).magnitude < TapRadialSensitivity)
-                tap = true;
-
-
-            
-
+            if (isDraging && (lastPosition - startTouch).magnitude < TapRadialSensitivity)
+                if (TapTimer > 0)
+                {
+                    // for tap (if we relese finger/mouse and timer is not run out this is Tap)
+                    tap = true;
+                    
+                }
+                else
+                {
+                    // if timer already run out, this is long tap
+                    longTap = true;
+                    
+                }
 
             Reset();
         }
 
         // Input for TouchScreen
-        if(Input.touches.Length > 0)
+        if (Input.touches.Length > 0)
         {
-            if(Input.touches[0].phase == TouchPhase.Began)
+            if (Input.touches[0].phase == TouchPhase.Began)
             {
+                if (TapTimer == 0f)
+                    TapTimer = TapTimeSensitivity;
+
                 startTouch = Input.touches[0].position;
                 touch = true;
                 isDraging = true;
@@ -97,22 +109,35 @@ public class MobileInput : MonoBehaviour {
                 CenterTurnVector = MyCamera.WorldToScreenPoint(transform.position);
 
                 StartTurnVector = Quaternion.FromToRotation(Vector3.up, (startTouch - CenterTurnVector)).eulerAngles;
+
             }
-            else if(Input.touches[0].phase == TouchPhase.Ended || Input.touches[0].phase == TouchPhase.Canceled)
+            else if (Input.touches[0].phase == TouchPhase.Ended || Input.touches[0].phase == TouchPhase.Canceled)  // on release finger
             {
-                if (TapTimer < TapTimeSensitivity && isDraging)
-                    tap = true;
 
                 lastPosition = Input.touches[0].position;
-
-              
+                               
+                if(isDraging && (lastPosition - startTouch).magnitude < TapRadialSensitivity)                    
+                    if (TapTimer > 0)
+                    {
+                        // for tap (if we relese finger/mouse and timer is not run out this is Tap)
+                        tap = true;                       
+                    }
+                    else
+                    {
+                        // if timer already run out, this is long tap
+                        longTap = true;
+                       
+                    }
 
                 Reset();
+
             }
+
+
         }
 
         // If we draging we seting delta touch
-        if(isDraging)
+        if (isDraging)
         {
             if (Input.touches.Length > 0)
                 deltaTouch = Input.touches[0].position - startTouch;
@@ -122,24 +147,25 @@ public class MobileInput : MonoBehaviour {
         }
 
         // Check if swipe
-        if(deltaTouch.magnitude > SwipeSensitivity)
+        if (deltaTouch.magnitude > SwipeSensitivity)
         {
             swipe = true;
 
             lastPosition = deltaTouch + startTouch;
-            
+
             Reset();
         }
 
-        if(isDraging)
+        if (isDraging)
         {
+            // counting clockwise turn state
             float NowTurn = Quaternion.FromToRotation(Vector3.up, (startTouch + deltaTouch - CenterTurnVector)).eulerAngles.z - StartTurnVector.z;
             if (NowTurn < 0)
                 NowTurn += 360f;
 
             int NowIndex = Mathf.FloorToInt(Mathf.Floor(NowTurn / 45f));
 
-            if(NowIndex == 0 && LastTurnIndex == 7)
+            if (NowIndex == 0 && LastTurnIndex == 7)
             {
                 print("Turn!");
                 turn = true;
@@ -149,9 +175,12 @@ public class MobileInput : MonoBehaviour {
             if (Mathf.Abs(NowIndex - LastTurnIndex) == 1)
                 LastTurnIndex = NowIndex;
         }
-	}
+        
 
+        
+    }
 
+    // because mobile inpup give us not location but point on the screen in pixels we need to transform it in actual position in world
     private Vector3 GetPositionFromScreen(Vector2 InScreenPos)
     {
         Vector3 MyVector = MyCamera.ScreenToWorldPoint(new Vector3(InScreenPos.x, InScreenPos.y, 0));
