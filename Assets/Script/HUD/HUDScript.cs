@@ -12,18 +12,29 @@ public class HUDScript : MonoBehaviour {
     public Text PointsText = null;
     GameObject MyChar = null;
 
+    public Text ValueText;
+    public float MinVal;
+    public float MaxVal;
+    public GameObject Options;
+
     public BonusIcon InvIcon;
     public BonusIcon BTIcon;
     public BonusIcon DDIcon;
     public BonusIcon_ByNumber FMIcon;
+
+    public float ScreenSize = 200;
+
 
     // Use this for initialization
     void Start () {
 
         if (!FindChar())
             print("No char was found : " + name);
+
         
-        
+
+        float currentAspect = (float)Screen.width / (float)Screen.height;
+        Camera.main.orthographicSize = Screen.currentResolution.width / currentAspect / ScreenSize;
 
         UpdateHealths();
 	}
@@ -97,5 +108,21 @@ public class HUDScript : MonoBehaviour {
         DDIcon.MyTimer = 0f;
         BTIcon.MyTimer = 0f;
         FMIcon.MyNumber = 0;
+    }
+
+    public void OnValueUpdated(float InVal)
+    {
+        if (MyChar == null)
+            if (!FindChar())
+                return;
+        float val = MinVal + (MaxVal - MinVal) * InVal;
+        
+        MyChar.GetComponent<MobileInput>().TapTimeSensitivity = val;
+        ValueText.text = val.ToString();
+    }
+
+    public void OpenCloseOptions()
+    {
+        Options.SetActive(!Options.activeSelf);
     }
 }

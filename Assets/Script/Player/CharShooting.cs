@@ -73,7 +73,7 @@ public class CharShooting : MonoBehaviour {
 
 
         // We fire if we swiped or long tap
-        if ((MyMobileInput.Swipe && LoadChar) || MyMobileInput.LongTap)
+        if (LoadChar && MyMobileInput.LongTap)
         {
             
             Vector3 StartVector = GetPositionFromScreen(MyMobileInput.LastPosition)- transform.position;

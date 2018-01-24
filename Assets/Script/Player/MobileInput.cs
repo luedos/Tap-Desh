@@ -7,7 +7,8 @@ public class MobileInput : MonoBehaviour {
     public float SwipeSensitivity = 125f;                       // how far in pixels you need to drag finger for fire swipe
     public float TapTimeSensitivity = 0.2f;                     // in which amount of time you need to release finger to make Tap (longer will be long Tap)
     public float TapRadialSensitivity = 40f;                    // in which radius from touch point tap will not fire
-    
+
+    public bool UseTap = true, UseLongTap = true, UseSwipe = true, UseTurn = true;
 
     [HideInInspector]
     public bool BlockInput = false;
@@ -77,16 +78,18 @@ public class MobileInput : MonoBehaviour {
         {
             lastPosition = Input.mousePosition;
 
-            if (isDraging && (lastPosition - startTouch).magnitude < TapRadialSensitivity)
+            if (isDraging && ((lastPosition - startTouch).magnitude < TapRadialSensitivity || TapRadialSensitivity == 0f))
                 if (TapTimer > 0)
                 {
                     // for tap (if we relese finger/mouse and timer is not run out this is Tap)
+                    if(UseTap)
                     tap = true;
                     
                 }
                 else
                 {
                     // if timer already run out, this is long tap
+                    if(UseLongTap)
                     longTap = true;
                     
                 }
@@ -116,15 +119,17 @@ public class MobileInput : MonoBehaviour {
 
                 lastPosition = Input.touches[0].position;
                                
-                if(isDraging && (lastPosition - startTouch).magnitude < TapRadialSensitivity)                    
+                if(isDraging && ((lastPosition - startTouch).magnitude < TapRadialSensitivity || TapRadialSensitivity == 0f))                    
                     if (TapTimer > 0)
                     {
                         // for tap (if we relese finger/mouse and timer is not run out this is Tap)
+                        if(UseTap)
                         tap = true;                       
                     }
                     else
                     {
                         // if timer already run out, this is long tap
+                        if(UseLongTap)
                         longTap = true;
                        
                     }
@@ -147,16 +152,17 @@ public class MobileInput : MonoBehaviour {
         }
 
         // Check if swipe
-        if (deltaTouch.magnitude > SwipeSensitivity)
-        {
-            swipe = true;
+        if(UseSwipe)
+       if (deltaTouch.magnitude > SwipeSensitivity)
+       {
+           swipe = true;
+       
+           lastPosition = deltaTouch + startTouch;
+       
+           Reset();
+       }
 
-            lastPosition = deltaTouch + startTouch;
-
-            Reset();
-        }
-
-        if (isDraging)
+        if (isDraging && UseTurn)
         {
             // counting clockwise turn state
             float NowTurn = Quaternion.FromToRotation(Vector3.up, (startTouch + deltaTouch - CenterTurnVector)).eulerAngles.z - StartTurnVector.z;
@@ -167,7 +173,6 @@ public class MobileInput : MonoBehaviour {
 
             if (NowIndex == 0 && LastTurnIndex == 7)
             {
-                print("Turn!");
                 turn = true;
                 Reset();
             }

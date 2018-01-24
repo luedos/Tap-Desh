@@ -70,7 +70,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1272332172257360}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.426589, y: 0.08349323, z: 0}
+  m_LocalPosition: {x: 0.5, y: 10.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4210872777727520}
@@ -166,6 +166,10 @@ MonoBehaviour:
   SwipeSensitivity: 120
   TapTimeSensitivity: 0.12
   TapRadialSensitivity: 40
+  UseTap: 1
+  UseLongTap: 1
+  UseSwipe: 1
+  UseTurn: 1
   BlockInput: 0
 --- !u!114 &114575514406535620
 MonoBehaviour:
@@ -182,6 +186,7 @@ MonoBehaviour:
   MyParticle: {fileID: 1209545600571120, guid: 9f4f8993e9abf1b49b5776362947b752, type: 2}
   TPTime: 0.3
   WalkThroughLayers: 090000000a0000000b0000000f0000001000000011000000
+  TP_InLayers: 090000000a0000001000000011000000
   MyLastLoc: {x: 0, y: 0, z: 0}
 --- !u!114 &114691840789423104
 MonoBehaviour:

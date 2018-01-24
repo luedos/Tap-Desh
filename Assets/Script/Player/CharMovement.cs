@@ -10,6 +10,7 @@ public class CharMovement : MonoBehaviour {
     public float TPTime = 0.5f;                 // How long tp will last by itself
 
     public int[] WalkThroughLayers;
+    public int[] TP_InLayers;
 
     [HideInInspector]
     public Vector3 MyLastLoc;                   // basicly this one used by AI
@@ -148,13 +149,7 @@ public class CharMovement : MonoBehaviour {
 
 
         // first of all we need to check is our possible finale location in something 
-        bool CollRes = true;
-        Collider2D MyColl = Physics2D.OverlapPoint(InPosition);
-
-        if (MyColl != null)
-            if (MyColl.tag != transform.tag)
-                CollRes = false;
-        // if collRes false that is meen we pointing in something which is not our own char
+        bool CollRes = IsValidPoint(InPosition);
 
 
         // after that we need to check soft ray (if it will gave false we will tp into strong wall)
@@ -317,6 +312,25 @@ public class CharMovement : MonoBehaviour {
             }
         }
 
+    }
+
+    bool IsValidPoint(Vector2 InCoord)
+    {
+        Collider2D MyColl = Physics2D.OverlapPoint(InCoord);
+
+        if (MyColl == null)
+            return true;
+
+        if (MyColl.tag == gameObject.tag)
+            return true;
+
+        for(int i = 0; i < TP_InLayers.Length; ++i)
+        {
+            if (MyColl.gameObject.layer == TP_InLayers[i])
+                return true;
+        }
+
+        return false;
     }
 }
 
