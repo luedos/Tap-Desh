@@ -7,7 +7,9 @@ public class CharMovement : MonoBehaviour {
 
     public float CameraInterpSpeed = 0;         // How fust camera will move(interp) from one point to another
     public GameObject MyParticle;               // particle on spawn
+    public GameObject EndTP_Particle;           
     public float TPTime = 0.5f;                 // How long tp will last by itself
+    public float TPPenalty = 0.5f;
 
     public int[] WalkThroughLayers;
     public int[] TP_InLayers;
@@ -20,8 +22,10 @@ public class CharMovement : MonoBehaviour {
     private Camera MyCamera;                    // Camera, to find point from the screen and interp it
     private MobileInput MyMobileInput;          // mobile input to get know when and where to tp
     private Vector3 CameraPosition;             // using for interpolate camera position (basicly just local variable)
+    private float TPPenaltyTimer = 0f;
 
     private float VisibleTimer = 0f;            // timer for count time in TP itself
+
 
     //private bool isLeft = false;
 
@@ -66,6 +70,11 @@ public class CharMovement : MonoBehaviour {
             ReturnVisible();
         }
 
+        if (TPPenaltyTimer > 0f)
+            TPPenaltyTimer -= Time.deltaTime;
+        else if (TPPenaltyTimer < 0f)
+            TPPenaltyTimer = 0f;
+
         
        // if we in beter tp, reduse timer of it
         if (isBetterTP)
@@ -79,7 +88,7 @@ public class CharMovement : MonoBehaviour {
        }
 
         // if we has tap, then we want to tp..
-        if(MyMobileInput.Tap)
+        if (MyMobileInput.Tap && TPPenaltyTimer == 0f)
         {
             
             MyLastLoc = transform.position;
@@ -114,6 +123,9 @@ public class CharMovement : MonoBehaviour {
 
         gameObject.GetComponent<SpriteRenderer>().enabled = true;
 
+        if (EndTP_Particle != null)
+            Instantiate(EndTP_Particle, transform.position, transform.rotation);
+
         gameObject.layer = 12;
     }
 
@@ -134,7 +146,9 @@ public class CharMovement : MonoBehaviour {
             // because of specific particle, we need set attractor
             ParticleAttractor MyAttractor = MyPar.GetComponent<ParticleAttractor>();
             if (MyAttractor != null)
+            {
                 MyAttractor.PointToAttract = transform;
+            }
         }
 
 
@@ -144,7 +158,7 @@ public class CharMovement : MonoBehaviour {
         gameObject.layer = 15;
         // and reset tp timer
         VisibleTimer = TPTime;
-
+        TPPenaltyTimer = TPPenalty;
 
 
 
@@ -159,9 +173,11 @@ public class CharMovement : MonoBehaviour {
         if (!SoftRayCast2D(MyOrigin, InPosition, out NewList) && CollRes)
             InPosLocal = InPosition;
         else
-            InPosLocal = NewList[NewList.Count - 1].point + NewList[NewList.Count - 1].normal * 0.1f; // but if we was pointing into something, or we cross some strong wall, we mast take last hit from raycast
+        {
+            InPosLocal = NewList[NewList.Count - 1].point + NewList[NewList.Count - 1].normal * 0.2f; // but if we was pointing into something, or we cross some strong wall, we mast take last hit from raycast
 
-            
+            //InPosLocal = InPosLocal + ((Vector2)transform.position - InPosLocal).normalized * 0.2f;
+        }
 
         // after we tp we want to adjust our location if possible 
 
@@ -190,14 +206,14 @@ public class CharMovement : MonoBehaviour {
             }
 
         }
-        
+
 
         // after all we just set our position
 
         transform.position = InPosLocal;
 
         return true;
-      
+
     }
 
     // all this do is make 8 raycast in 360 deg., and record result in "Res"
@@ -302,7 +318,7 @@ public class CharMovement : MonoBehaviour {
                 return true;
 
             // relocate start pos so next ray start incide soft wall
-            StartPos = LocalRayHit.point;
+            StartPos = LocalRayHit.point + (End - Start).normalized * 0.15f;
 
             // and in the end check for some bugs (what if something will go wrong)
             if (OutHit.Count > 30)

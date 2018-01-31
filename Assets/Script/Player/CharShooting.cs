@@ -117,7 +117,7 @@ public class CharShooting : MonoBehaviour {
 
         // Tap meen it's not swipe, so we didn't shoot, but start to load, so we want reset everything
         // about "!MyMobileInput.IsDraging && LoadChar" that meen what we are not draging, but still loading somewhy, because of that we want reset all
-        if ((!MyMobileInput.IsDraging && LoadChar) || MyMobileInput.Tap)
+        if ((!MyMobileInput.IsDraging && LoadChar))
         {
             ResetAll();
         }
@@ -164,6 +164,7 @@ public class CharShooting : MonoBehaviour {
     // simple fire one bullet
     private void Fire(Vector3 SpawnVector, Quaternion SpawnQuat)
     {
+
         GameObject MyBullet = null;
 
         if (BulletToShoot != null)

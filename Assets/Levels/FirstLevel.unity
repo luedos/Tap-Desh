@@ -990,6 +990,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114434326574681522, guid: 199fe29ac531d0c4298d035417cc8996,
+        type: 2}
+      propertyPath: UseSwipe
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 199fe29ac531d0c4298d035417cc8996, type: 2}
   m_IsPrefabParent: 0
@@ -2276,12 +2281,12 @@ Prefab:
     - target: {fileID: 224630290809738080, guid: b73fca9041d75c049a30d4e8ad8cb6d3,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 337
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224630290809738080, guid: b73fca9041d75c049a30d4e8ad8cb6d3,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 161
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224630290809738080, guid: b73fca9041d75c049a30d4e8ad8cb6d3,
         type: 2}

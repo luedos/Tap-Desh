@@ -14,33 +14,32 @@ public class ParticleAttractor : MonoBehaviour {
 
     private ParticleSystem.Particle[] MyPar;
 
-    bool isLeft = false;
     
 
     // Use this for initialization
     void Start () {
         //GetComponent<Rigidbody>().velocity = Vector3.up * 0.2f;
         Destroy(gameObject, 1f);
-	}
+
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
-
-
-        if(StartTime > 0)
-        {
-            StartTime -= Time.deltaTime;
-            return;
-        }
-
-        transform.position += Vector3.right * (isLeft ? -0.001f : 0.001f);
-        isLeft = !isLeft;
 
         if (PointToAttract == null)
         {
             Destroy(gameObject);
             return;
         }
+
+
+        if (StartTime > 0)
+        {
+            StartTime -= Time.deltaTime;
+            return;
+        }
+
         int ParCount = MyParticleSystem.particleCount;
 
         MyPar = new ParticleSystem.Particle[ParCount];
@@ -62,5 +61,8 @@ public class ParticleAttractor : MonoBehaviour {
 
         
         MyParticleSystem.SetParticles(MyPar, MyPar.Length);
-	}
+
+
+
+    }
 }

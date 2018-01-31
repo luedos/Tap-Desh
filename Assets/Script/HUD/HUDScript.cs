@@ -15,7 +15,13 @@ public class HUDScript : MonoBehaviour {
     public Text ValueText;
     public float MinVal;
     public float MaxVal;
+    public Text PenaltyText;
     public GameObject Options;
+
+    public Text MyTimer;
+    private float Timer = 0.5f;
+
+    public Text LevelText;
 
     public BonusIcon InvIcon;
     public BonusIcon BTIcon;
@@ -38,11 +44,23 @@ public class HUDScript : MonoBehaviour {
 
         UpdateHealths();
 	}
-	
-	// Update is called once per frame
+
+
+    private void OnEnable()
+    {
+        Timer = 0.5f;
+    }
+
+    // Update is called once per frame
     void Update()
     {
-        PointsText.text = GameManager.Instance.GamePoints.ToString();
+        PointsText.text = Mathf.FloorToInt( GameManager.Instance.GamePoints).ToString();
+
+        LevelText.text = GameManager.Instance.Level.ToString();
+
+        Timer += Time.deltaTime;
+
+        MyTimer.text = Mathf.Floor(Timer).ToString();
     }
 	bool FindChar()
     {
@@ -87,7 +105,6 @@ public class HUDScript : MonoBehaviour {
     {
         InvIcon.MyTimer = ByTime;
     }
-
     public void AddBonusIcon_DD(float ByTime)
     {
         DDIcon.MyTimer = ByTime;
@@ -119,6 +136,18 @@ public class HUDScript : MonoBehaviour {
         
         MyChar.GetComponent<MobileInput>().TapTimeSensitivity = val;
         ValueText.text = val.ToString();
+    }
+
+    public void OnPenaltyUpdated(float InVal)
+    {
+        if (MyChar == null)
+            if (!FindChar())
+                return;
+
+
+
+        MyChar.GetComponent<CharMovement>().TPPenalty = InVal;
+        PenaltyText.text = InVal.ToString();
     }
 
     public void OpenCloseOptions()

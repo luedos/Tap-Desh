@@ -18,8 +18,21 @@ public class Spawner : MonoBehaviour {
 
     [Tooltip("If empty will spawn one object on spawner transform")]
     public Transform[] SpawnTransforms;
-        
-    public int NumberOfSpawn = 1;
+
+    public int maxSpawnNumber = 0;
+    public int minSpawnNumber = 0;
+
+    public int MaxSpawnNumber { get { return maxSpawnNumber; } set { maxSpawnNumber = value; } }
+    public int MinSpawnNumber { get { return minSpawnNumber; } set { minSpawnNumber = value; } }
+
+    public int minLimit = 0;
+    public int maxLimit = 0;
+    public string Tag;
+
+    public int MaxLimit { get { return maxLimit; } set { maxLimit = value; } }
+    public int MinLimit { get { return minLimit; } set { minLimit = value; } }
+
+    private int NumberOfSpawn = 1;
 
     [Tooltip("Before spawn it checks is in this radius exsist collider, if yes it will not spawn, if 0 it will not check")]
     public float SpawnRadius = 1;
@@ -29,18 +42,35 @@ public class Spawner : MonoBehaviour {
     private float Timer = 0f;
     private bool bSpawnByTimer = false;
 
+    private int SpawnObjectFocus = 0;
+
     // Use this for initialization
     void Start()
     {
+
+        float ChanceSum = 0f;
+        for (int i = 0; i < MyChanceObjects.Length; ++i)
+            ChanceSum += MyChanceObjects[i].MyChance;
+
+        for (int i = 0; i < MyChanceObjects.Length; ++i)
+            MyChanceObjects[i].MyChance *= 100f / ChanceSum;
+
         if (SpawnTimer > 0f)
         {
             if (SpawnOnCreate)
+            {
                 bSpawnByTimer = true;
+                SpawnObjects();
+            }
         }
         else
             if (SpawnOnCreate)
             SpawnObjects();
+
+
+
     }
+
     bool ChooseObject(out GameObject OutObject)
     {
         if (MyChanceObjects.Length == 0)
@@ -57,11 +87,8 @@ public class Spawner : MonoBehaviour {
 
         float MaxChance = 0f;
 
-        for (int i = 0; i < MyChanceObjects.Length; ++i)
-            MaxChance += MyChanceObjects[i].MyChance;
+        float MyChance = Random.Range(0f, 100f);
 
-        float MyChance = Random.Range(0f, MaxChance);
-        MaxChance = 0f;
 
         for(int i = 0; i < MyChanceObjects.Length; ++i)
         {
@@ -82,12 +109,32 @@ public class Spawner : MonoBehaviour {
         if (MyChanceObjects.Length == 0)
             return false;
 
+        if (minSpawnNumber >= maxSpawnNumber)
+            NumberOfSpawn = minSpawnNumber;
+        else
+            NumberOfSpawn = Random.Range(minSpawnNumber, maxSpawnNumber + 1);
+
+        print("Original number : " + NumberOfSpawn);
+
+        if (maxLimit > 0)
+        {
+            int Enemies = GameObject.FindGameObjectsWithTag(Tag).Length;
+            if (Enemies >= maxLimit)
+                return true;
+
+            if (Enemies > minLimit && maxLimit > minLimit)
+                NumberOfSpawn = Mathf.CeilToInt(NumberOfSpawn * ((float)(maxLimit - Enemies)) / (maxLimit - minLimit));
+        }
+
+
         if (SpawnTransforms.Length == 0)
         {            
             return SpawnOnPosition(transform.position);
         }
 
         bool WhatReturn = false;
+
+        print("Rewrite number : " + NumberOfSpawn);
 
         if (SpawnTransforms.Length <= NumberOfSpawn)
         {
@@ -177,4 +224,51 @@ public class Spawner : MonoBehaviour {
         if (!SpawnOnCreate && bSpawnByTimer)
             bSpawnByTimer = false;
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="SpawnObjectIndex"></param>
+    /// <param name="inPercentage"> percent out of 100 </param>
+    public void SetSpawnPercentage(int SpawnObjectIndex, float inPercentage)
+    {
+        if(SpawnObjectIndex < MyChanceObjects.Length)
+        {
+            float LocalPercent = inPercentage > 100f ? 100f : inPercentage;
+
+            float Coeff = (100f - LocalPercent) / (101f - MyChanceObjects[SpawnObjectIndex].MyChance);
+
+            for (int i = 0; i < MyChanceObjects.Length; ++i)
+                MyChanceObjects[i].MyChance *= Coeff;
+
+            MyChanceObjects[SpawnObjectIndex].MyChance = LocalPercent;
+        }
+    }
+
+    /// <summary>
+    /// Change Percentege for object by index of SpawnObjectFocus
+    /// Use SetSpawnObjectFocus to change last
+    /// </summary>
+    /// <param name="inPercentage"> percent out of 100 </param>
+    public void SetSpawnPercentage(float inPercentage)
+    {
+        if (SpawnObjectFocus < MyChanceObjects.Length)
+        {
+            float LocalPercent = inPercentage > 100f ? 100f : inPercentage;
+
+            float Coeff = (100f - LocalPercent) / (101f - MyChanceObjects[SpawnObjectFocus].MyChance);
+
+            for (int i = 0; i < MyChanceObjects.Length; ++i)
+                MyChanceObjects[i].MyChance *= Coeff;
+
+            MyChanceObjects[SpawnObjectFocus].MyChance = LocalPercent;
+        }
+    }
+
+    public void SetSpawnObjectFocus(int inFocus)
+    {
+        if (inFocus < MyChanceObjects.Length)
+            SpawnObjectFocus = inFocus;
+    }
+
 }

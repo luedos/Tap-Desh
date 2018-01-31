@@ -9,6 +9,15 @@ public class PickUp_FM : MonoBehaviour {
 
     // I am tired from unity collision
     private bool isLeft = true;
+
+    public float DestroyInSec = 15f;
+
+    private void Start()
+    {
+        if (DestroyInSec > 0)
+            Destroy(gameObject, DestroyInSec);
+    }
+
     void Update()
     {
         transform.position += Vector3.right * (isLeft ? -0.01f : 0.01f);

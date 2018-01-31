@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+public enum EnemyType
+{
+    Middle,
+    Fast,
+    Hard
+}
+
 enum AI_State
 {
     Idle = 0,
@@ -55,18 +62,22 @@ public class EnemyAI : MonoBehaviour {
     public float SearchWaitingTime = 3f;        // How much time AI will wait in last search state
     public float TPTime = 0.5f;                 // Length of "InsideTPTimer"
     public GameObject TP_Particle = null;
+    public GameObject EndTP_Particle;
     public GameObject PointerPF = null;         // For player HUD
     [Tooltip("Show how fast enemy can move his aim")]
     public float AimInterpSpeed = 5f;
+    public EnemyType MyEnemy;
+    public TextMesh LevelText;
 
 
     public Vector3 StartSerchLocation { get { return MyLastLoc; } }
     public Vector3 Destination { get { return Location; } }
     public GameObject Enemy { get { return enemy; } }
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start() {
         // First of all checking is everything allright
-        
+
+
 
         if (Perception != null)
             ViewRadius = Perception.radius;
@@ -87,6 +98,9 @@ public class EnemyAI : MonoBehaviour {
 
         if (PointerPF == null)
             print("Out of PointerPF : " + gameObject.name);
+
+
+
         else
         {
             /* As I said this is for player HUD
@@ -106,7 +120,7 @@ public class EnemyAI : MonoBehaviour {
                     MyGO.GetComponent<HUDPointerScript>().Char = GameObject.FindGameObjectWithTag("Player").transform.Find("Main Camera").gameObject;
                 }
             }
-            
+
         }
 
         GoIdle();
@@ -115,12 +129,54 @@ public class EnemyAI : MonoBehaviour {
         FireTimer = FireRate;
         TPTimer = TPRate;
         SearchWaitTimer = SearchWaitingTime;
+
+        EnemyHealth MyHP = GetComponent<EnemyHealth>();
+
+        switch (MyEnemy)
+        {
+
+            case EnemyType.Middle:
+                if (MyHP != null)
+                {
+                    MyHP.MaxHP += GameManager.Instance.plus_HP_Middle;
+                    MyHP.RegenHP(10);
+                    MyHP.PointsForDeath += 0.5f * (GameManager.Instance.plus_HP_Middle + GameManager.Instance.plus_Damage_Middle);
+                }
+                BulletLoadLevel += GameManager.Instance.plus_Damage_Middle;
+
+                LevelText.text = GameManager.Instance.plus_Damage_Middle.ToString() + ":" + GameManager.Instance.plus_HP_Middle.ToString();
+                break;
+            case EnemyType.Fast:
+                if (MyHP != null)
+                {
+                    MyHP.MaxHP += GameManager.Instance.plus_HP_Fast;
+                    MyHP.RegenHP(10);
+                    MyHP.PointsForDeath += 0.5f * (GameManager.Instance.plus_HP_Fast + GameManager.Instance.plus_Damage_Fast);
+                }
+                BulletLoadLevel += GameManager.Instance.plus_Damage_Fast;
+
+                LevelText.text = GameManager.Instance.plus_Damage_Fast.ToString() + ":" + GameManager.Instance.plus_HP_Fast.ToString();
+                break;
+            case EnemyType.Hard:
+                if (MyHP != null)
+                {
+                    MyHP.MaxHP += GameManager.Instance.plus_HP_Hard;
+                    MyHP.RegenHP(10);
+                    MyHP.PointsForDeath += 0.5f * (GameManager.Instance.plus_HP_Hard + GameManager.Instance.plus_Damage_Hard);
+                }
+                BulletLoadLevel += GameManager.Instance.plus_Damage_Hard;
+
+                LevelText.text = GameManager.Instance.plus_Damage_Hard.ToString() + ":" + GameManager.Instance.plus_HP_Hard.ToString();
+                break;
+            default:
+                break;
+        }
     }
 	
 	void Update () {
 
         
-        
+
         // For make collision allways work ("fuck you" - unity collision)
         transform.position += Vector3.right * (isLeft ? -0.01f : 0.01f);
         isLeft = !isLeft;
@@ -363,6 +419,9 @@ public class EnemyAI : MonoBehaviour {
     {
         gameObject.GetComponent<SpriteRenderer>().enabled = true;
 
+        if (EndTP_Particle != null)
+            Instantiate(EndTP_Particle, transform.position, transform.rotation);
+
         gameObject.layer = 11;
     }
 
@@ -404,6 +463,11 @@ public class EnemyAI : MonoBehaviour {
         // finding rotation        
         Quaternion SpawnQuat = Quaternion.FromToRotation(Vector3.up, InDirection);
 
+        Vector3 SomeEuler = SpawnQuat.eulerAngles;
+        SomeEuler.x = 0;
+        SomeEuler.y = 0;
+        SpawnQuat.eulerAngles = SomeEuler;
+
         GameObject MyBullet = null;
         
         // We spawn bullet itself..
@@ -436,9 +500,13 @@ public class EnemyAI : MonoBehaviour {
             // For particle attract to our finale position
             ParticleAttractor MyAttractor = MyPar.GetComponent<ParticleAttractor>();
             if (MyAttractor != null)
+            {
                 MyAttractor.PointToAttract = transform;
+            }
         }
         
+        
+
         // Make us invisible
         GetComponent<SpriteRenderer>().enabled = false;
         // recharge timer

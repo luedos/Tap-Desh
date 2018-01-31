@@ -122,6 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BulletSpeed: 50
   LifeTime: 5
+  SpeedPerLoadLvl: 10
 --- !u!212 &212434058678017956
 SpriteRenderer:
   m_ObjectHideFlags: 1

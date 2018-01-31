@@ -138,10 +138,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 233278885}
   - {fileID: 1497044445}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &31185872
 GameObject:
@@ -364,155 +363,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &233278884
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 29477793}
-    m_Modifications:
-    - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
-        type: 2}
-      propertyPath: MyChanceObjects.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
-        type: 2}
-      propertyPath: SpawnTransforms.Array.size
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4291813072492244, guid: 2205bc96ca52714498ababb986d4831e, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -100.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4291813072492244, guid: 2205bc96ca52714498ababb986d4831e, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 20.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4291813072492244, guid: 2205bc96ca52714498ababb986d4831e, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 2.2758713
-      objectReference: {fileID: 0}
-    - target: {fileID: 4291813072492244, guid: 2205bc96ca52714498ababb986d4831e, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4291813072492244, guid: 2205bc96ca52714498ababb986d4831e, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4291813072492244, guid: 2205bc96ca52714498ababb986d4831e, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4291813072492244, guid: 2205bc96ca52714498ababb986d4831e, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4291813072492244, guid: 2205bc96ca52714498ababb986d4831e, type: 2}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1357968864810478, guid: 2205bc96ca52714498ababb986d4831e, type: 2}
-      propertyPath: m_Name
-      value: HardSpawner
-      objectReference: {fileID: 0}
-    - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
-        type: 2}
-      propertyPath: MyChanceObjects.Array.data[0].MyObject
-      value: 
-      objectReference: {fileID: 1200429543301362, guid: 6cc0dcd3e5a5b8245b6bea83ffe6d5f5,
-        type: 2}
-    - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
-        type: 2}
-      propertyPath: MyChanceObjects.Array.data[1].MyObject
-      value: 
-      objectReference: {fileID: 1200138408934696, guid: 594d5b16f72c92a44920f94cb5fed9dd,
-        type: 2}
-    - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
-        type: 2}
-      propertyPath: MyChanceObjects.Array.data[0].MyChance
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
-        type: 2}
-      propertyPath: MyChanceObjects.Array.data[1].MyChance
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
-        type: 2}
-      propertyPath: SpawnTimer
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
-        type: 2}
-      propertyPath: SpawnTransforms.Array.data[0]
-      value: 
-      objectReference: {fileID: 839555573}
-    - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
-        type: 2}
-      propertyPath: SpawnTransforms.Array.data[1]
-      value: 
-      objectReference: {fileID: 2003567307}
-    - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
-        type: 2}
-      propertyPath: SpawnTransforms.Array.data[2]
-      value: 
-      objectReference: {fileID: 322058484}
-    - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
-        type: 2}
-      propertyPath: SpawnTransforms.Array.data[3]
-      value: 
-      objectReference: {fileID: 1338332890}
-    - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
-        type: 2}
-      propertyPath: SpawnTransforms.Array.data[4]
-      value: 
-      objectReference: {fileID: 1298284803}
-    - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
-        type: 2}
-      propertyPath: SpawnTransforms.Array.data[5]
-      value: 
-      objectReference: {fileID: 1510957788}
-    - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
-        type: 2}
-      propertyPath: SpawnTransforms.Array.data[6]
-      value: 
-      objectReference: {fileID: 625945743}
-    - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
-        type: 2}
-      propertyPath: SpawnTransforms.Array.data[7]
-      value: 
-      objectReference: {fileID: 2030000973}
-    - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
-        type: 2}
-      propertyPath: SpawnTransforms.Array.data[8]
-      value: 
-      objectReference: {fileID: 1188506906}
-    - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
-        type: 2}
-      propertyPath: SpawnTransforms.Array.data[9]
-      value: 
-      objectReference: {fileID: 1203983817}
-    - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
-        type: 2}
-      propertyPath: NumberOfSpawn
-      value: 4
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 2205bc96ca52714498ababb986d4831e, type: 2}
-  m_IsPrefabParent: 0
---- !u!4 &233278885 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4291813072492244, guid: 2205bc96ca52714498ababb986d4831e,
-    type: 2}
-  m_PrefabInternal: {fileID: 233278884}
---- !u!114 &233278886 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
-    type: 2}
-  m_PrefabInternal: {fileID: 233278884}
-  m_Script: {fileID: 11500000, guid: 71f4c9923fdcd8d4a8e98454318e5a02, type: 3}
 --- !u!1 &322058483
 GameObject:
   m_ObjectHideFlags: 0
@@ -746,6 +596,21 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114194712042072114, guid: 199fe29ac531d0c4298d035417cc8996,
+        type: 2}
+      propertyPath: MyEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114575514406535620, guid: 199fe29ac531d0c4298d035417cc8996,
+        type: 2}
+      propertyPath: BugEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114575514406535620, guid: 199fe29ac531d0c4298d035417cc8996,
+        type: 2}
+      propertyPath: SoftBugEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4815868921490782, guid: 199fe29ac531d0c4298d035417cc8996, type: 2}
       propertyPath: m_LocalPosition.x
       value: 1.426589
@@ -778,25 +643,95 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 20995515525448686, guid: 199fe29ac531d0c4298d035417cc8996,
+    - target: {fileID: 114194712042072114, guid: 199fe29ac531d0c4298d035417cc8996,
         type: 2}
-      propertyPath: m_AllowDynamicResolution
-      value: 0
+      propertyPath: MyEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 114434326574681522, guid: 199fe29ac531d0c4298d035417cc8996,
+    - target: {fileID: 114194712042072114, guid: 199fe29ac531d0c4298d035417cc8996,
         type: 2}
-      propertyPath: UseSwipe
-      value: 0
+      propertyPath: MyEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114434326574681522, guid: 199fe29ac531d0c4298d035417cc8996,
+    - target: {fileID: 114194712042072114, guid: 199fe29ac531d0c4298d035417cc8996,
         type: 2}
-      propertyPath: UseTurn
-      value: 0
+      propertyPath: MyEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 114434326574681522, guid: 199fe29ac531d0c4298d035417cc8996,
+    - target: {fileID: 114194712042072114, guid: 199fe29ac531d0c4298d035417cc8996,
         type: 2}
-      propertyPath: TapRadialSensitivity
-      value: 0
+      propertyPath: MyEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TurnOnText
+      objectReference: {fileID: 0}
+    - target: {fileID: 114194712042072114, guid: 199fe29ac531d0c4298d035417cc8996,
+        type: 2}
+      propertyPath: MyEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114194712042072114, guid: 199fe29ac531d0c4298d035417cc8996,
+        type: 2}
+      propertyPath: MyEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: "\u0425\u0443\u0451\u0432\u043E"
+      objectReference: {fileID: 0}
+    - target: {fileID: 114575514406535620, guid: 199fe29ac531d0c4298d035417cc8996,
+        type: 2}
+      propertyPath: BugEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114575514406535620, guid: 199fe29ac531d0c4298d035417cc8996,
+        type: 2}
+      propertyPath: BugEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114575514406535620, guid: 199fe29ac531d0c4298d035417cc8996,
+        type: 2}
+      propertyPath: BugEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114575514406535620, guid: 199fe29ac531d0c4298d035417cc8996,
+        type: 2}
+      propertyPath: BugEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TurnOnText
+      objectReference: {fileID: 0}
+    - target: {fileID: 114575514406535620, guid: 199fe29ac531d0c4298d035417cc8996,
+        type: 2}
+      propertyPath: BugEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114575514406535620, guid: 199fe29ac531d0c4298d035417cc8996,
+        type: 2}
+      propertyPath: BugEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: "\u0425\u0443\u0451\u0432\u0430\u044F \u043D\u043E\u0440\u043C\u0430\u043B\u044C"
+      objectReference: {fileID: 0}
+    - target: {fileID: 114575514406535620, guid: 199fe29ac531d0c4298d035417cc8996,
+        type: 2}
+      propertyPath: SoftBugEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114575514406535620, guid: 199fe29ac531d0c4298d035417cc8996,
+        type: 2}
+      propertyPath: SoftBugEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114575514406535620, guid: 199fe29ac531d0c4298d035417cc8996,
+        type: 2}
+      propertyPath: SoftBugEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114575514406535620, guid: 199fe29ac531d0c4298d035417cc8996,
+        type: 2}
+      propertyPath: SoftBugEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TurnOnText
+      objectReference: {fileID: 0}
+    - target: {fileID: 114575514406535620, guid: 199fe29ac531d0c4298d035417cc8996,
+        type: 2}
+      propertyPath: SoftBugEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114575514406535620, guid: 199fe29ac531d0c4298d035417cc8996,
+        type: 2}
+      propertyPath: SoftBugEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: "\u0425\u0443\u0451\u0432\u044B\u0439 Soft Ray"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 199fe29ac531d0c4298d035417cc8996, type: 2}
@@ -1095,6 +1030,86 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224232458049395214, guid: 4dd50c93a5f119f418221b6ca2d4bb94,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224232458049395214, guid: 4dd50c93a5f119f418221b6ca2d4bb94,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224232458049395214, guid: 4dd50c93a5f119f418221b6ca2d4bb94,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 224232458049395214, guid: 4dd50c93a5f119f418221b6ca2d4bb94,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -25
+      objectReference: {fileID: 0}
+    - target: {fileID: 224931021334414510, guid: 4dd50c93a5f119f418221b6ca2d4bb94,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224931021334414510, guid: 4dd50c93a5f119f418221b6ca2d4bb94,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224931021334414510, guid: 4dd50c93a5f119f418221b6ca2d4bb94,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 224931021334414510, guid: 4dd50c93a5f119f418221b6ca2d4bb94,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -75
+      objectReference: {fileID: 0}
+    - target: {fileID: 224238223911732222, guid: 4dd50c93a5f119f418221b6ca2d4bb94,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224238223911732222, guid: 4dd50c93a5f119f418221b6ca2d4bb94,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224238223911732222, guid: 4dd50c93a5f119f418221b6ca2d4bb94,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 224238223911732222, guid: 4dd50c93a5f119f418221b6ca2d4bb94,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -125
+      objectReference: {fileID: 0}
+    - target: {fileID: 224323038039351218, guid: 4dd50c93a5f119f418221b6ca2d4bb94,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224323038039351218, guid: 4dd50c93a5f119f418221b6ca2d4bb94,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224323038039351218, guid: 4dd50c93a5f119f418221b6ca2d4bb94,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 224323038039351218, guid: 4dd50c93a5f119f418221b6ca2d4bb94,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -175
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4dd50c93a5f119f418221b6ca2d4bb94, type: 2}
@@ -1759,12 +1774,12 @@ Prefab:
     - target: {fileID: 224630290809738080, guid: b73fca9041d75c049a30d4e8ad8cb6d3,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 337
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224630290809738080, guid: b73fca9041d75c049a30d4e8ad8cb6d3,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 161
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224630290809738080, guid: b73fca9041d75c049a30d4e8ad8cb6d3,
         type: 2}
@@ -2138,7 +2153,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4291813072492244, guid: 2205bc96ca52714498ababb986d4831e, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1357968864810478, guid: 2205bc96ca52714498ababb986d4831e, type: 2}
       propertyPath: m_Name
@@ -2157,7 +2172,7 @@ Prefab:
     - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
         type: 2}
       propertyPath: MyChanceObjects.Array.data[2].MyChance
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
         type: 2}
@@ -2209,15 +2224,34 @@ Prefab:
       propertyPath: SpawnTransforms.Array.data[1]
       value: 
       objectReference: {fileID: 1110994650}
+    - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
+        type: 2}
+      propertyPath: MinSpawnNumber
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
+        type: 2}
+      propertyPath: MaxSpawnNumber
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
+        type: 2}
+      propertyPath: maxSpawnNumber
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
+        type: 2}
+      propertyPath: minSpawnNumber
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2205bc96ca52714498ababb986d4831e, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &1259539922 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
-    type: 2}
-  m_PrefabInternal: {fileID: 1259539921}
-  m_Script: {fileID: 11500000, guid: 71f4c9923fdcd8d4a8e98454318e5a02, type: 3}
 --- !u!1 &1298284802
 GameObject:
   m_ObjectHideFlags: 0
@@ -2272,7 +2306,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1338332889
 GameObject:
@@ -2462,7 +2496,7 @@ Prefab:
     - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
         type: 2}
       propertyPath: SpawnTimer
-      value: 15
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
         type: 2}
@@ -2490,12 +2524,12 @@ Prefab:
     - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
         type: 2}
       propertyPath: MyChanceObjects.Array.data[1].MyChance
-      value: 0.2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
         type: 2}
       propertyPath: MyChanceObjects.Array.data[2].MyChance
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
         type: 2}
@@ -2556,6 +2590,61 @@ Prefab:
         type: 2}
       propertyPath: SpawnOnCreate
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
+        type: 2}
+      propertyPath: MaxSpawnNum
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
+        type: 2}
+      propertyPath: MinSpawnNum
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
+        type: 2}
+      propertyPath: MaxSpawnNumber
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
+        type: 2}
+      propertyPath: MinSpawnNumber
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
+        type: 2}
+      propertyPath: Tag
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
+        type: 2}
+      propertyPath: MinLimit
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
+        type: 2}
+      propertyPath: MaxLimit
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
+        type: 2}
+      propertyPath: minLimit
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
+        type: 2}
+      propertyPath: maxLimit
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
+        type: 2}
+      propertyPath: minSpawnNumber
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
+        type: 2}
+      propertyPath: maxSpawnNumber
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2205bc96ca52714498ababb986d4831e, type: 2}
@@ -3031,7 +3120,7 @@ Transform:
   - {fileID: 1188506906}
   - {fileID: 1203983817}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1838436090
 GameObject:
@@ -3275,6 +3364,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2001472587 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
+    type: 2}
+  m_PrefabInternal: {fileID: 1259539921}
+  m_Script: {fileID: 11500000, guid: 71f4c9923fdcd8d4a8e98454318e5a02, type: 3}
 --- !u!1 &2003567306
 GameObject:
   m_ObjectHideFlags: 0
@@ -3464,16 +3559,393 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Char: {fileID: 0}
   BonusSpawners:
-  - {fileID: 1259539922}
-  EnemySpawners:
-  - MySpawner: {fileID: 1497044446}
-    StartSpawnOnLvl: 0
-  - MySpawner: {fileID: 233278886}
-    StartSpawnOnLvl: 5
+  - {fileID: 2001472587}
+  MyEvents:
+  - InLevel: 8
+    InEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1497044446}
+          m_MethodName: SetSpawnObjectFocus
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 2
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1497044446}
+          m_MethodName: SetSpawnPercentage
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 4
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1497044446}
+          m_MethodName: SetSpawnObjectFocus
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1497044446}
+          m_MethodName: SetSpawnPercentage
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 5
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+  - InLevel: 20
+    InEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1497044446}
+          m_MethodName: SetSpawnObjectFocus
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 2
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1497044446}
+          m_MethodName: SetSpawnPercentage
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 15
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1497044446}
+          m_MethodName: SetSpawnObjectFocus
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1497044446}
+          m_MethodName: SetSpawnPercentage
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 15
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+  - InLevel: 0
+    InEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1497044446}
+          m_MethodName: SetSpawnObjectFocus
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 2
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1497044446}
+          m_MethodName: SetSpawnPercentage
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1497044446}
+          m_MethodName: SetSpawnObjectFocus
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1497044446}
+          m_MethodName: SetSpawnPercentage
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1497044446}
+          m_MethodName: set_MaxSpawnNumber
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 2
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1497044446}
+          m_MethodName: set_MinSpawnNumber
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1497044446}
+          m_MethodName: set_MaxLimit
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 6
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1497044446}
+          m_MethodName: set_MinLimit
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 3
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+  - InLevel: 10
+    InEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1497044446}
+          m_MethodName: set_MaxSpawnNumber
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 4
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1497044446}
+          m_MethodName: set_MinSpawnNumber
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 2
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1497044446}
+          m_MethodName: set_MinLimit
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 4
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1497044446}
+          m_MethodName: set_MaxLimit
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 8
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+  - InLevel: 20
+    InEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1497044446}
+          m_MethodName: set_MaxSpawnNumber
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 4
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1497044446}
+          m_MethodName: set_MinSpawnNumber
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 2
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1497044446}
+          m_MethodName: set_MinLimit
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 4
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1497044446}
+          m_MethodName: set_MaxLimit
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 8
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+  - InLevel: 35
+    InEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1497044446}
+          m_MethodName: set_MaxSpawnNumber
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 6
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1497044446}
+          m_MethodName: set_MinSpawnNumber
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 3
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1497044446}
+          m_MethodName: set_MinLimit
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 6
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1497044446}
+          m_MethodName: set_MaxLimit
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 12
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
   MainChar: {fileID: 1226391446}
   BeginTransform: {fileID: 1315293624}
   myHUD: {fileID: 2118962576}
   myGameOverScreen: {fileID: 1412266110}
+  plus_HP_Middle: 0
+  plus_HP_Fast: 0
+  plus_HP_Hard: 0
+  plus_Damage_Middle: 0
+  plus_Damage_Fast: 0
+  plus_Damage_Hard: 0
+  MyDifs:
+  - MyDif: 0
+    StartLevel: 20
+    LevelDelta: 20
+    MaxLevel: 51
+    MyLevel: 0
+  - MyDif: 1
+    StartLevel: 30
+    LevelDelta: 20
+    MaxLevel: 51
+    MyLevel: 0
+  - MyDif: 2
+    StartLevel: 25
+    LevelDelta: 25
+    MaxLevel: 51
+    MyLevel: 0
+  - MyDif: 3
+    StartLevel: 15
+    LevelDelta: 30
+    MaxLevel: 46
+    MyLevel: 0
+  - MyDif: 4
+    StartLevel: 25
+    LevelDelta: 15
+    MaxLevel: 41
+    MyLevel: 0
+  - MyDif: 5
+    StartLevel: 35
+    LevelDelta: 20
+    MaxLevel: 56
+    MyLevel: 0
 --- !u!4 &2137490394
 Transform:
   m_ObjectHideFlags: 0

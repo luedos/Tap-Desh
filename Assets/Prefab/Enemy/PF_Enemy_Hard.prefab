@@ -39,7 +39,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4179561608737360}
-  - component: {fileID: 212669847026690754}
   - component: {fileID: 50129617454165078}
   - component: {fileID: 58818875007596104}
   - component: {fileID: 114784937201461162}
@@ -48,6 +47,7 @@ GameObject:
   - component: {fileID: 114937039307368294}
   - component: {fileID: 114137784855175394}
   - component: {fileID: 114970256597457346}
+  - component: {fileID: 212120736502135992}
   m_Layer: 11
   m_Name: PF_Enemy_Hard
   m_TagString: Enemy
@@ -93,6 +93,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1733132831148074
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4288967375768496}
+  - component: {fileID: 23524508024842960}
+  - component: {fileID: 102516704319424708}
+  m_Layer: 11
+  m_Name: New Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1804776561575798
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,15 +146,29 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1200138408934696}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.0865784, y: -11.176434, z: 0}
+  m_LocalPosition: {x: -17.472002, y: 11.443997, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4938046675520354}
   - {fileID: 4177075403308614}
   - {fileID: 4311417202098444}
   - {fileID: 4978429299188106}
+  - {fileID: 4288967375768496}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4288967375768496
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1733132831148074}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4179561608737360}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4311417202098444
 Transform:
@@ -178,6 +209,40 @@ Transform:
   m_Father: {fileID: 4179561608737360}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &23524508024842960
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1733132831148074}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!50 &50129617454165078
 Rigidbody2D:
   serializedVersion: 4
@@ -228,6 +293,27 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2.56
+--- !u!102 &102516704319424708
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1733132831148074}
+  m_Text: 0:0
+  m_OffsetZ: 0
+  m_CharacterSize: 0.5
+  m_LineSpacing: 1
+  m_Anchor: 4
+  m_Alignment: 0
+  m_TabSize: 4
+  m_FontSize: 70
+  m_FontStyle: 0
+  m_RichText: 1
+  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4278190080
 --- !u!114 &114137784855175394
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -488,8 +574,12 @@ MonoBehaviour:
   TPTime: 0.3
   TP_Particle: {fileID: 1209545600571120, guid: 9f4f8993e9abf1b49b5776362947b752,
     type: 2}
+  EndTP_Particle: {fileID: 1564403160835222, guid: 68982cf2d96a35847b60675e7cdc2cd9,
+    type: 2}
   PointerPF: {fileID: 1212170428830084, guid: 48e04cb5030a8b0498704626f40f7b95, type: 2}
   AimInterpSpeed: 5
+  MyEnemy: 2
+  LevelText: {fileID: 102516704319424708}
 --- !u!114 &114800421305967362
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -569,10 +659,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHP: 2
-  PointsForDeath: 20
+  PointsForDeath: 2
   DestroyAfterDeath: 1
   TimeBeforDestroy: 0
---- !u!212 &212669847026690754
+--- !u!212 &212120736502135992
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

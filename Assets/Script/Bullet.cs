@@ -20,8 +20,8 @@ public class Bullet : MonoBehaviour {
         GetComponent<Rigidbody2D>().velocity = transform.up * BulletSpeed;
         Destroy(gameObject, LifeTime);
     }
-	
-	
+
+
     public void BulletDestroy()
     {
 
@@ -60,7 +60,7 @@ public class Bullet : MonoBehaviour {
         if (LoadLvl < 1)
             LoadLevel = 1;
         else
-            LoadLevel = Mathf.Floor(LoadLvl);
+            LoadLevel = LoadLvl;
 
         const float MaxLoad = 3;
 

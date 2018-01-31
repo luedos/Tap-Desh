@@ -285,7 +285,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\ParticleAttractor.cs" />
     <Compile Include="Assets\Script\Bullet.cs" />
     <Compile Include="Assets\Script\Enemy\EnemyAI.cs" />
     <Compile Include="Assets\Script\Enemy\EnemyHealth.cs" />
@@ -297,9 +296,12 @@
     <Compile Include="Assets\Script\GameStats.cs" />
     <Compile Include="Assets\Script\HUD\BonusIcon.cs" />
     <Compile Include="Assets\Script\HUD\BonusIcon_ByNumber.cs" />
+    <Compile Include="Assets\Script\HUD\DebugText.cs" />
     <Compile Include="Assets\Script\HUD\HUDPointerScript.cs" />
     <Compile Include="Assets\Script\HUD\HUDScript.cs" />
     <Compile Include="Assets\Script\HUD\MainMenuUI.cs" />
+    <Compile Include="Assets\Script\ParticleAttractor.cs" />
+    <Compile Include="Assets\Script\ParticleDestroy.cs" />
     <Compile Include="Assets\Script\PickUps\PickUp_BT.cs" />
     <Compile Include="Assets\Script\PickUps\PickUp_DD.cs" />
     <Compile Include="Assets\Script\PickUps\PickUp_FM.cs" />
