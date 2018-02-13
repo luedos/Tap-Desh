@@ -91,9 +91,10 @@ public class GameManager : MonoBehaviour {
 
     public void IncreaseGamePoints(float InPoints)
     {
+        myHUD.GetComponent<HUDScript>().AddPoints(Mathf.FloorToInt(gamePoints + InPoints) - Mathf.FloorToInt(gamePoints));
+
         gamePoints += InPoints;
-
-
+        
         if(gamePoints > NextLvlPoints)
             LevelUpdate();
     }
@@ -223,7 +224,13 @@ public class GameManager : MonoBehaviour {
         myHUD.SetActive(true);
         myGameOverScreen.SetActive(false);
 
-        MainChar.GetComponent<HealthPoints>().MakeAllive();
+        CharPart[] MyCPs = MainChar.GetComponents<CharPart>();
+
+        for(int i = 0; i < MyCPs.Length; ++i)
+        {
+            MyCPs[i].ResetPart();
+        }
+
         MainChar.transform.position = BeginTransform.position;
 
 

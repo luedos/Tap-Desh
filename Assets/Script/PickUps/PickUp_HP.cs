@@ -2,27 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickUp_HP : MonoBehaviour
+public class PickUp_HP : PickUp
 {
     public int HealthToRegen = 3;               // How many hp bonus will regen
-    public int PointsOnTake = 3;                // How many points it will give on pickup
 
-    private bool isLeft = true;
 
-    public float DestroyInSec = 15f;
-
-    private void Start()
+    public override void PickUpMe(GameObject byObject)
     {
-        if (DestroyInSec > 0)
-            Destroy(gameObject, DestroyInSec);
+        HealthPoints OtherHP = byObject.GetComponent<HealthPoints>();
+        if (OtherHP != null)
+        {
+            GameManager.Instance.IncreaseGamePoints(PointsOnTake);
+            OtherHP.RegenHP(HealthToRegen);
+            Destroy(gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        transform.position += Vector3.right * (isLeft ? -0.01f : 0.01f);
-        isLeft = !isLeft;
-    }
 
     // Set up health regen
     void OnTriggerEnter2D(Collider2D other)
@@ -30,13 +25,7 @@ public class PickUp_HP : MonoBehaviour
 
         if (other.tag == "Player")
         {
-            HealthPoints OtherHP = other.gameObject.GetComponent<HealthPoints>();
-            if (OtherHP != null)
-            {
-                GameManager.Instance.IncreaseGamePoints(PointsOnTake);
-                OtherHP.RegenHP(HealthToRegen);
-                Destroy(gameObject);
-            }
+            PickUpMe(other.gameObject);
         }
 
     }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharShooting : MonoBehaviour {
+public class CharShooting : CharPart {
 
 
     public GameObject BulletToShoot;
@@ -19,6 +19,7 @@ public class CharShooting : MonoBehaviour {
     private float Load = 0f;                    // power of load on the moment
     private int FireMultiplacator = 0;          // it's level of how many bullets will be on sides
 
+    public int GetFireMode { get { return FireMultiplacator; } }
 
     // simple check is every thing ok
     void Start () {
@@ -123,6 +124,14 @@ public class CharShooting : MonoBehaviour {
         }
     }
 
+    public override void ResetPart()
+    {
+        IsDD = false;
+        DDTimer = 0f;
+
+        FireMultiplacator = 0;
+    }
+
     // because mobile inpup give us not location but point on the screen in pixels we need to transform it in actual position in world
     private Vector3 GetPositionFromScreen(Vector2 InScreenPos)
     {
@@ -193,16 +202,14 @@ public class CharShooting : MonoBehaviour {
                 {
                     if (FireMultiplacator > 0)
                     {
-                        --FireMultiplacator;
-                        GameManager.Instance.myHUD.GetComponent<HUDScript>().AddBonusIcon_FM(-1);
+                        --FireMultiplacator;                        
                     }
                     break;
                 }
             case 5:
                 {
                     if (FireMultiplacator < 5)
-                    {
-                        GameManager.Instance.myHUD.GetComponent<HUDScript>().AddBonusIcon_FM(1);
+                    {                        
                         ++FireMultiplacator;
                     }
                     break;
@@ -212,9 +219,6 @@ public class CharShooting : MonoBehaviour {
                 {
                     if (InLevel > -1 && InLevel < 5)
                         FireMultiplacator = InLevel;
-
-                    if(InLevel==0)
-                        GameManager.Instance.myHUD.GetComponent<HUDScript>().AddBonusIcon_FM(0);
                     break;
                 }
         }

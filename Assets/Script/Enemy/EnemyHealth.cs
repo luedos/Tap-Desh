@@ -11,6 +11,8 @@ public class EnemyHealth : HealthPoints {
     [Tooltip("How many time will pass after death, before owner will be destroy (only if DestroyAfterDeath = true)")]
     public float TimeBeforDestroy = 1f;
 
+    private bool DamagedByTP = false;
+
     protected override void Death()
     {
         GameManager.Instance.IncreaseGamePoints(PointsForDeath);
@@ -20,5 +22,18 @@ public class EnemyHealth : HealthPoints {
             Destroy(gameObject, TimeBeforDestroy);
 
         base.Death();
+    }
+
+    public void TPDamage(int inDamage)
+    {
+
+        if (IsDead && DamagedByTP)
+            return;
+
+        DamagedByTP = true;
+        hp -= inDamage;
+        if (hp < 1)
+            Death();
+        
     }
 }

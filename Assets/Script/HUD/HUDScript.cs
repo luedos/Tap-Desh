@@ -18,15 +18,17 @@ public class HUDScript : MonoBehaviour {
     public Text PenaltyText;
     public GameObject Options;
 
-    public Text MyTimer;
-    private float Timer = 0.5f;
+    public Text MessageBox;
+    public AnimationPlay MessageAnimation;
+
+    public Text PointsBox;
+    public AnimationPlay PointsAnimation;
 
     public Text LevelText;
 
     public BonusIcon InvIcon;
     public BonusIcon BTIcon;
     public BonusIcon DDIcon;
-    public BonusIcon_ByNumber FMIcon;
 
     public float ScreenSize = 200;
 
@@ -45,12 +47,6 @@ public class HUDScript : MonoBehaviour {
         UpdateHealths();
 	}
 
-
-    private void OnEnable()
-    {
-        Timer = 0.5f;
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -58,10 +54,20 @@ public class HUDScript : MonoBehaviour {
 
         LevelText.text = GameManager.Instance.Level.ToString();
 
-        Timer += Time.deltaTime;
-
-        MyTimer.text = Mathf.Floor(Timer).ToString();
     }
+
+    public void ShowMessage(string inMessage)
+    {
+        MessageBox.text = inMessage;
+        MessageAnimation.PlayMyAnim();
+    }
+
+    public void AddPoints(int inPoints)
+    {
+        PointsBox.text = "+" + inPoints;
+        PointsAnimation.PlayMyAnim();
+    }
+
 	bool FindChar()
     {
        MyChar = GameManager.Instance.Char;
@@ -109,11 +115,6 @@ public class HUDScript : MonoBehaviour {
     {
         DDIcon.MyTimer = ByTime;
     }
-    public void AddBonusIcon_FM(int InIncreaser)
-    {
-        
-        FMIcon.IncreaseNumber(InIncreaser);
-    }
     public void AddBonusIcon_BT(float ByTime)
     {
         BTIcon.MyTimer = ByTime;
@@ -124,7 +125,6 @@ public class HUDScript : MonoBehaviour {
         InvIcon.MyTimer = 0f;
         DDIcon.MyTimer = 0f;
         BTIcon.MyTimer = 0f;
-        FMIcon.MyNumber = 0;
     }
 
     public void OnValueUpdated(float InVal)

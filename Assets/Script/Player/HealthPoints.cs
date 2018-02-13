@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthPoints : MonoBehaviour {
+public class HealthPoints : CharPart {
 
-    public int MaxHP = 3;                                                   // so we can't overheal ourself
+    public int LimitHP = 3;                                                   // so we can't overheal ourself
+    protected int MaxHP;
+    protected float InvinsibilityTimer = 0f;
+    protected bool isInvincible = false;
+
     public bool IsInvincible { get { return isInvincible; } }
 
     // all of this so some scripts could subscribe and know if our hp is changed
@@ -13,16 +17,29 @@ public class HealthPoints : MonoBehaviour {
 
 
     private bool isDead = false;
-    protected float InvinsibilityTimer = 0f;
-    protected bool isInvincible = false;
-    private int hp = 0;
+
+    protected int hp = 0;
     private int startLayer;
 
     public int HP { get { return hp; } }
+    public int StartMaxHP { get { return MaxHP; } }
     public bool IsDead { get { return isDead; } }
 
+    public override void ResetPart()
+    {
+        GetComponent<SpriteRenderer>().enabled = true;
+        gameObject.layer = startLayer;
+
+        hp = LimitHP;
+        MaxHP = LimitHP;
+
+        CallHPSubs();
+
+        isDead = false;
+    }
+
     // call evere method which subscribe on it (also if can't call some method we deleting them)
-    protected void CallHPSubs()
+    public void CallHPSubs()
     {
         for (int i = 0; i < DamageTaken.Count; ++i)
         {
@@ -39,6 +56,7 @@ public class HealthPoints : MonoBehaviour {
     // seting our actual HP
     public virtual void Start()
     {
+        MaxHP = LimitHP;
         hp = MaxHP;
         startLayer = gameObject.layer;
     }
@@ -46,13 +64,15 @@ public class HealthPoints : MonoBehaviour {
     // on damage taken
     public void DoDamage(int Damage)
     {
+        if (isDead)
+            return;
         
         if(!isInvincible)
             hp -= Damage;
 
         CallHPSubs();
         
-        if (hp <= 0f)
+        if (hp <= 0)
             Death();
 
     }
@@ -62,8 +82,8 @@ public class HealthPoints : MonoBehaviour {
     {
         
         hp += InHP;
-        if (hp > MaxHP)
-            hp = MaxHP;
+        if (hp > LimitHP)
+            hp = LimitHP;
 
         CallHPSubs();
 
@@ -93,25 +113,7 @@ public class HealthPoints : MonoBehaviour {
 
         isDead = true;
     }
-    // set up invincibility
-    public void MakeInvincible(float OnTime)
-    {
-        if(OnTime == 0f)
-        {
-            if(isInvincible)
-            {
-                InvinsibilityTimer = 0f;
-                isInvincible = false;
-                GameManager.Instance.myHUD.GetComponent<HUDScript>().AddBonusIcon_Inv(0f);
-            }
 
-            return;
-        }
-
-        InvinsibilityTimer = OnTime;
-        isInvincible = true;
-        GameManager.Instance.myHUD.GetComponent<HUDScript>().AddBonusIcon_Inv(OnTime);
-    }
 
     // basicly if we hit bullet but we are invinsible we will reflect it
     void OnCollisionEnter2D(Collision2D other)
@@ -140,21 +142,4 @@ public class HealthPoints : MonoBehaviour {
         }
     }
 
-    // Return all variables on defoult from death state
-    public virtual void MakeAllive()
-    {
-        if(isDead)
-        {
-            GetComponent<SpriteRenderer>().enabled = true;
-            gameObject.layer = startLayer;
-            
-            MakeInvincible(3f);
-
-            hp = MaxHP;
-
-            CallHPSubs();
-
-            isDead = false;
-        }
-    }
 }

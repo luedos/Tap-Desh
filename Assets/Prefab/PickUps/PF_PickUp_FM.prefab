@@ -91,6 +91,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PointsOnTake: 3
   DestroyInSec: 25
+  MaxPoints: 45
+  MinPoints: 30
+  MaxFireMode: 4
+  MaxHPBuffer: 4
+  MaxTPDamage: 2
 --- !u!212 &212374699733609928
 SpriteRenderer:
   m_ObjectHideFlags: 1

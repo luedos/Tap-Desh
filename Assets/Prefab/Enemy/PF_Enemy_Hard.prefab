@@ -66,6 +66,7 @@ GameObject:
   - component: {fileID: 114600163185233486}
   - component: {fileID: 114551179551140582}
   - component: {fileID: 114800421305967362}
+  - component: {fileID: 114919466550986684}
   m_Layer: 11
   m_Name: IdleSpotGen
   m_TagString: Untagged
@@ -504,6 +505,8 @@ MonoBehaviour:
     MyTest: {fileID: 114551179551140582}
   - Name: Distance
     MyTest: {fileID: 114551179551140582}
+  - Name: NotCollide
+    MyTest: {fileID: 114919466550986684}
   CenterQuery: {fileID: 114137784855175394}
   DrawDebagPoints: 0
   DrawPointOnFind: 0
@@ -558,7 +561,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IdleCenter: {x: 0, y: 0, z: 0}
-  InvisibleLayers: 090000000a0000000b0000000f0000001000000011000000
+  InvisibleLayers:
+    serializedVersion: 2
+    m_Bits: 200192
   Bullet: {fileID: 1430116545421112, guid: f4fbae15c09b60241bd58232e93e349f, type: 2}
   FireRate: 2.5
   NumOfBullet: 4
@@ -636,6 +641,23 @@ MonoBehaviour:
   DrawPointOnFindTime: 3
   SideRange: 15
   DotDistanse: 3
+--- !u!114 &114919466550986684
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1239734099101958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d7134fd1f9e4af48bb0cc63046cbd3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MyGenerator: {fileID: 0}
+  TurnOffTest: 0
+  Multiplier: 1
+  MinMultiplier: 0
+  MyQuery: {fileID: 114265417554394168}
+  IsColliding: 0
 --- !u!114 &114937039307368294
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -658,7 +680,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1516ed7d7e9163549ab9ee75408c24bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 2
+  LimitHP: 2
   PointsForDeath: 2
   DestroyAfterDeath: 1
   TimeBeforDestroy: 0

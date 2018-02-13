@@ -188,9 +188,17 @@ MonoBehaviour:
     type: 2}
   TPTime: 0.3
   TPPenalty: 0.07
-  WalkThroughLayers: 090000000a0000000b0000000f0000001000000011000000
-  TP_InLayers: 090000000a0000001000000011000000
+  TPDamageParticle: {fileID: 1712522211733196, guid: 5ee6ae8093acfe14d86fc255364bcf92,
+    type: 2}
+  WalkThroughLayers:
+    serializedVersion: 2
+    m_Bits: 237350
+  TP_InLayers:
+    serializedVersion: 2
+    m_Bits: 200704
   MyLastLoc: {x: 0, y: 0, z: 0}
+  TPDamageRadius: 8
+  TPDamage: 0
 --- !u!114 &114691840789423104
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -202,7 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c85508ce86b0d942b1938210cc55a81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 5
+  LimitHP: 5
 --- !u!124 &124108526051222712
 Behaviour:
   m_ObjectHideFlags: 1

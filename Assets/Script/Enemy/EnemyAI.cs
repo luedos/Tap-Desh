@@ -47,7 +47,8 @@ public class EnemyAI : MonoBehaviour {
     public Vector3 IdleCenter;
 
     // For Enemy customisation    
-    public int[] InvisibleLayers;               // Layers through which AI can see (bullets for example)
+    //public int[] InvisibleLayers;
+    public LayerMask InvisibleLayers;  // Layers through which AI can see (bullets for example)
     public GameObject Bullet = null;
     public float FireRate = 1.5f;
     public int NumOfBullet = 1;                 // How many bullets will spawned at once
@@ -138,7 +139,7 @@ public class EnemyAI : MonoBehaviour {
             case EnemyType.Middle:
                 if (MyHP != null)
                 {
-                    MyHP.MaxHP += GameManager.Instance.plus_HP_Middle;
+                    MyHP.LimitHP += GameManager.Instance.plus_HP_Middle;
                     MyHP.RegenHP(10);
                     MyHP.PointsForDeath += 0.5f * (GameManager.Instance.plus_HP_Middle + GameManager.Instance.plus_Damage_Middle);
                 }
@@ -149,7 +150,7 @@ public class EnemyAI : MonoBehaviour {
             case EnemyType.Fast:
                 if (MyHP != null)
                 {
-                    MyHP.MaxHP += GameManager.Instance.plus_HP_Fast;
+                    MyHP.LimitHP += GameManager.Instance.plus_HP_Fast;
                     MyHP.RegenHP(10);
                     MyHP.PointsForDeath += 0.5f * (GameManager.Instance.plus_HP_Fast + GameManager.Instance.plus_Damage_Fast);
                 }
@@ -160,7 +161,7 @@ public class EnemyAI : MonoBehaviour {
             case EnemyType.Hard:
                 if (MyHP != null)
                 {
-                    MyHP.MaxHP += GameManager.Instance.plus_HP_Hard;
+                    MyHP.LimitHP += GameManager.Instance.plus_HP_Hard;
                     MyHP.RegenHP(10);
                     MyHP.PointsForDeath += 0.5f * (GameManager.Instance.plus_HP_Hard + GameManager.Instance.plus_Damage_Hard);
                 }
@@ -273,6 +274,7 @@ public class EnemyAI : MonoBehaviour {
                 if (FireSpotGenerator.FindSpot(out PosToTP))
                     TP_ToPos(PosToTP);
 
+
                 TPTimer = TPRate;
             }
         }
@@ -369,6 +371,8 @@ public class EnemyAI : MonoBehaviour {
     // on idle we..
     public void GoIdle()
     {
+        GetComponent<SpriteRenderer>().color = Color.green;
+        
         // if you need to explaine this, you are dumb
         MyState = AI_State.Idle;
         Perception.radius = ViewRadius;
@@ -382,6 +386,8 @@ public class EnemyAI : MonoBehaviour {
     // on search we..
     public void GoSearch()
     {
+        GetComponent<SpriteRenderer>().color = Color.yellow;
+
         // seting some locations
         Location = enemy.GetComponent<CharMovement>().MyLastLoc;
         MyLastLoc = transform.position;
@@ -397,6 +403,8 @@ public class EnemyAI : MonoBehaviour {
     // on attacking we..
     public void GoAttack(GameObject Enemy)
     {
+        GetComponent<SpriteRenderer>().color = Color.red;
+
         // seting enemy
         enemy = Enemy;
 
@@ -616,24 +624,9 @@ public class EnemyAI : MonoBehaviour {
                 return false;
 
             // every hit must be added to resoult
-            OutHit.Add(LocalRayHit);
-            
-            
-            bool isFind = false;
+            OutHit.Add(LocalRayHit);          
 
-            // does our raycast hit an invisible layer?
-            for(int i = 0; i < InvisibleLayers.Length; ++i)
-            {
-                if(LocalRayHit.collider.gameObject.layer == InvisibleLayers[i])
-                {
-                    // if yes we no longer need to check that
-                    isFind = true;
-                    break;
-                }
-            }
-
-            // and if we hit a visible layer
-            if (!isFind)
+            if (InvisibleLayers != (InvisibleLayers | (1 << LocalRayHit.transform.gameObject.layer)))
                 return true;
 
             // if we hit invisible layer adjust location a liitle bit and go on

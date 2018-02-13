@@ -8,6 +8,7 @@ public class ParticleDestroy : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        if(TimeForDestroy != 0f)
         Destroy(gameObject, TimeForDestroy);
 	}
 

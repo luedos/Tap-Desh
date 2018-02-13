@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerHealth : HealthPoints {
 
-    
+
+
     protected override void Death()
     {
         // making all bonuses dissapiar on death
@@ -12,21 +13,6 @@ public class PlayerHealth : HealthPoints {
         MobileInput MyMI = GetComponent<MobileInput>();
         if (MyMI != null)
             MyMI.BlockInput = true;
-
-        CharShooting MyCH = GetComponent<CharShooting>();
-        if (MyCH != null)
-        {
-            MyCH.SetFireMultOnLevel(0);
-            MyCH.MakeDD(0f);
-        }
-
-        CharMovement MyMV = GetComponent<CharMovement>();
-        if (MyMV)
-            MyMV.MakeBetterTP(0f);
-
-        if (isInvincible)
-            MakeInvincible(0f);
-
                 
         GameManager.Instance.GameOver();
 
@@ -36,17 +22,41 @@ public class PlayerHealth : HealthPoints {
     public override void Start()
     {
         base.Start();
-        CallHPSubs();
+        
         MakeInvincible(3f);
+
+        CallHPSubs();
     }
 
-    public override void MakeAllive()
+    public override void ResetPart()
     {
         MobileInput MyMI = GetComponent<MobileInput>();
         if (MyMI != null)
             MyMI.BlockInput = false;
 
-        base.MakeAllive();        
+        MakeInvincible(3f);
+
+        base.ResetPart();        
+    }
+
+    // set up invincibility
+    public void MakeInvincible(float OnTime)
+    {
+        if (OnTime == 0f)
+        {
+            if (isInvincible)
+            {
+                InvinsibilityTimer = 0f;
+                isInvincible = false;
+                GameManager.Instance.myHUD.GetComponent<HUDScript>().AddBonusIcon_Inv(0f);
+            }
+
+            return;
+        }
+
+        InvinsibilityTimer = OnTime;
+        isInvincible = true;
+        GameManager.Instance.myHUD.GetComponent<HUDScript>().AddBonusIcon_Inv(OnTime);
     }
 
 }

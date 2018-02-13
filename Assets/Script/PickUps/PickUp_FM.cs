@@ -2,26 +2,101 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickUp_FM : MonoBehaviour {
+public class PickUp_FM : PickUp {
 
-    public int PointsOnTake = 3;           // How many points it will give on pickup
+    public int MaxPoints = 30;
+    public int MinPoints = 20;
 
+    public int MaxFireMode = 3;
+    public int MaxHPBuffer = 3;
+    public int MaxTPDamage = 2;
 
-    // I am tired from unity collision
-    private bool isLeft = true;
-
-    public float DestroyInSec = 15f;
-
-    private void Start()
+    public override void PickUpMe(GameObject byObject)
     {
-        if (DestroyInSec > 0)
-            Destroy(gameObject, DestroyInSec);
+        int MyNum = Random.Range(1, 4);
+        switch (MyNum)
+        {
+            case 1:
+                GoFireMode(byObject);
+                break;
+            case 2:
+                GoTPDamage(byObject);
+                break;
+            case 3:
+                GoHPBuffer(byObject);
+                break;
+            default:
+                GoPoints();
+                break;
+        }
     }
 
-    void Update()
+    private void GoFireMode(GameObject inPlayer)
     {
-        transform.position += Vector3.right * (isLeft ? -0.01f : 0.01f);
-        isLeft = !isLeft;
+        CharShooting MyShooting = inPlayer.GetComponent<CharShooting>();
+        if (MyShooting != null)
+        {
+            if(MyShooting.GetFireMode >= MaxFireMode)
+            {
+                GoPoints();
+                return;
+            }
+            
+            MyShooting.SetFireMultOnLevel(5);
+            GameManager.Instance.myHUD.GetComponent<HUDScript>().ShowMessage("Fire mode on level " + MyShooting.GetFireMode);
+            Destroy(gameObject);
+        }
+    }
+
+    private void GoHPBuffer(GameObject inPlayer)
+    {
+        PlayerHealth MyHP = inPlayer.GetComponent<PlayerHealth>();
+        if(MyHP != null)
+        {
+            if(MyHP.LimitHP - MyHP.StartMaxHP >= MaxHPBuffer)
+            {
+                GoPoints();
+                return;
+            }
+
+            ++MyHP.LimitHP;
+            MyHP.RegenHP(1);
+            MyHP.CallHPSubs();
+            GameManager.Instance.myHUD.GetComponent<HUDScript>().ShowMessage("Player max HP now " + MyHP.LimitHP);
+            Destroy(gameObject);
+        }
+    }
+
+    private void GoTPDamage(GameObject inPlayer)
+    {
+        CharMovement MyCM = inPlayer.GetComponent<CharMovement>();
+        if(MyCM != null)
+        {
+            if(MyCM.TPDamage >= MaxTPDamage)
+            {
+                GoPoints();
+                return;
+            }
+
+            ++MyCM.TPDamage;
+            if(MyCM.TPDamage == 1)
+                GameManager.Instance.myHUD.GetComponent<HUDScript>().ShowMessage("TP now damaging enemies");
+            else
+                GameManager.Instance.myHUD.GetComponent<HUDScript>().ShowMessage("TP damaging on " + MyCM.TPDamage);
+            Destroy(gameObject);
+        }
+
+    }
+
+    private void GoPoints()
+    {
+        int MyNum = Random.Range(MinPoints, MaxPoints + 1);
+
+        GameManager.Instance.IncreaseGamePoints(MyNum);
+
+        GameManager.Instance.myHUD.GetComponent<HUDScript>().ShowMessage("Points bonus " + MyNum);
+
+        Destroy(gameObject);
     }
 
     // Set up fire mode
@@ -30,13 +105,7 @@ public class PickUp_FM : MonoBehaviour {
         
         if (other.tag == "Player")
         {
-            CharShooting MyShooting = other.GetComponent<CharShooting>();
-            if (MyShooting != null)
-            {
-                GameManager.Instance.IncreaseGamePoints(PointsOnTake);
-                MyShooting.SetFireMultOnLevel(5);
-                Destroy(gameObject);
-            }
+            PickUpMe(other.gameObject);
         }
 
     }

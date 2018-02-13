@@ -361,7 +361,7 @@ Transform:
   - {fileID: 390737975}
   - {fileID: 1584713032}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &322058483
 GameObject:
@@ -596,21 +596,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114194712042072114, guid: 199fe29ac531d0c4298d035417cc8996,
-        type: 2}
-      propertyPath: MyEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114575514406535620, guid: 199fe29ac531d0c4298d035417cc8996,
-        type: 2}
-      propertyPath: BugEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114575514406535620, guid: 199fe29ac531d0c4298d035417cc8996,
-        type: 2}
-      propertyPath: SoftBugEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4815868921490782, guid: 199fe29ac531d0c4298d035417cc8996, type: 2}
       propertyPath: m_LocalPosition.x
       value: 1.426589
@@ -642,96 +627,6 @@ Prefab:
     - target: {fileID: 4815868921490782, guid: 199fe29ac531d0c4298d035417cc8996, type: 2}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114194712042072114, guid: 199fe29ac531d0c4298d035417cc8996,
-        type: 2}
-      propertyPath: MyEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114194712042072114, guid: 199fe29ac531d0c4298d035417cc8996,
-        type: 2}
-      propertyPath: MyEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114194712042072114, guid: 199fe29ac531d0c4298d035417cc8996,
-        type: 2}
-      propertyPath: MyEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114194712042072114, guid: 199fe29ac531d0c4298d035417cc8996,
-        type: 2}
-      propertyPath: MyEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: TurnOnText
-      objectReference: {fileID: 0}
-    - target: {fileID: 114194712042072114, guid: 199fe29ac531d0c4298d035417cc8996,
-        type: 2}
-      propertyPath: MyEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 114194712042072114, guid: 199fe29ac531d0c4298d035417cc8996,
-        type: 2}
-      propertyPath: MyEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: "\u0425\u0443\u0451\u0432\u043E"
-      objectReference: {fileID: 0}
-    - target: {fileID: 114575514406535620, guid: 199fe29ac531d0c4298d035417cc8996,
-        type: 2}
-      propertyPath: BugEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114575514406535620, guid: 199fe29ac531d0c4298d035417cc8996,
-        type: 2}
-      propertyPath: BugEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114575514406535620, guid: 199fe29ac531d0c4298d035417cc8996,
-        type: 2}
-      propertyPath: BugEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114575514406535620, guid: 199fe29ac531d0c4298d035417cc8996,
-        type: 2}
-      propertyPath: BugEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: TurnOnText
-      objectReference: {fileID: 0}
-    - target: {fileID: 114575514406535620, guid: 199fe29ac531d0c4298d035417cc8996,
-        type: 2}
-      propertyPath: BugEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 114575514406535620, guid: 199fe29ac531d0c4298d035417cc8996,
-        type: 2}
-      propertyPath: BugEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: "\u0425\u0443\u0451\u0432\u0430\u044F \u043D\u043E\u0440\u043C\u0430\u043B\u044C"
-      objectReference: {fileID: 0}
-    - target: {fileID: 114575514406535620, guid: 199fe29ac531d0c4298d035417cc8996,
-        type: 2}
-      propertyPath: SoftBugEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114575514406535620, guid: 199fe29ac531d0c4298d035417cc8996,
-        type: 2}
-      propertyPath: SoftBugEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114575514406535620, guid: 199fe29ac531d0c4298d035417cc8996,
-        type: 2}
-      propertyPath: SoftBugEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114575514406535620, guid: 199fe29ac531d0c4298d035417cc8996,
-        type: 2}
-      propertyPath: SoftBugEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: TurnOnText
-      objectReference: {fileID: 0}
-    - target: {fileID: 114575514406535620, guid: 199fe29ac531d0c4298d035417cc8996,
-        type: 2}
-      propertyPath: SoftBugEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 114575514406535620, guid: 199fe29ac531d0c4298d035417cc8996,
-        type: 2}
-      propertyPath: SoftBugEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: "\u0425\u0443\u0451\u0432\u044B\u0439 Soft Ray"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 199fe29ac531d0c4298d035417cc8996, type: 2}
@@ -1030,6 +925,36 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114938589376053880, guid: 4dd50c93a5f119f418221b6ca2d4bb94,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.36764705
+      objectReference: {fileID: 0}
+    - target: {fileID: 114938589376053880, guid: 4dd50c93a5f119f418221b6ca2d4bb94,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114938589376053880, guid: 4dd50c93a5f119f418221b6ca2d4bb94,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.3720081
+      objectReference: {fileID: 0}
+    - target: {fileID: 114938589376053880, guid: 4dd50c93a5f119f418221b6ca2d4bb94,
+        type: 2}
+      propertyPath: m_FontData.m_Alignment
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 224688501529811422, guid: 4dd50c93a5f119f418221b6ca2d4bb94,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114938589376053880, guid: 4dd50c93a5f119f418221b6ca2d4bb94,
+        type: 2}
+      propertyPath: m_Text
+      value: +10
       objectReference: {fileID: 0}
     - target: {fileID: 224232458049395214, guid: 4dd50c93a5f119f418221b6ca2d4bb94,
         type: 2}
@@ -2153,7 +2078,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4291813072492244, guid: 2205bc96ca52714498ababb986d4831e, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1357968864810478, guid: 2205bc96ca52714498ababb986d4831e, type: 2}
       propertyPath: m_Name
@@ -2172,7 +2097,7 @@ Prefab:
     - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
         type: 2}
       propertyPath: MyChanceObjects.Array.data[2].MyChance
-      value: 0.5
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
         type: 2}
@@ -2487,7 +2412,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4291813072492244, guid: 2205bc96ca52714498ababb986d4831e, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1357968864810478, guid: 2205bc96ca52714498ababb986d4831e, type: 2}
       propertyPath: m_Name
@@ -2519,7 +2444,7 @@ Prefab:
     - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
         type: 2}
       propertyPath: MyChanceObjects.Array.data[0].MyChance
-      value: 2
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
         type: 2}
@@ -3362,7 +3287,7 @@ Transform:
   - {fileID: 614029442}
   - {fileID: 1740062854}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2001472587 stripped
 MonoBehaviour:
@@ -3561,102 +3486,58 @@ MonoBehaviour:
   BonusSpawners:
   - {fileID: 2001472587}
   MyEvents:
-  - InLevel: 8
+  - InLevel: 10
     InEvent:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1497044446}
-          m_MethodName: SetSpawnObjectFocus
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 2
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1497044446}
           m_MethodName: SetSpawnPercentage
-          m_Mode: 4
+          m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
-            m_FloatArgument: 4
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1497044446}
-          m_MethodName: SetSpawnObjectFocus
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 1
             m_FloatArgument: 0
-            m_StringArgument: 
+            m_StringArgument: 1|1
             m_BoolArgument: 0
           m_CallState: 2
         - m_Target: {fileID: 1497044446}
           m_MethodName: SetSpawnPercentage
-          m_Mode: 4
+          m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
-            m_FloatArgument: 5
-            m_StringArgument: 
+            m_FloatArgument: 0
+            m_StringArgument: 2|1
             m_BoolArgument: 0
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
-  - InLevel: 20
+  - InLevel: 25
     InEvent:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1497044446}
-          m_MethodName: SetSpawnObjectFocus
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 2
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1497044446}
           m_MethodName: SetSpawnPercentage
-          m_Mode: 4
+          m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
-            m_FloatArgument: 15
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1497044446}
-          m_MethodName: SetSpawnObjectFocus
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 1
             m_FloatArgument: 0
-            m_StringArgument: 
+            m_StringArgument: 1|3
             m_BoolArgument: 0
           m_CallState: 2
         - m_Target: {fileID: 1497044446}
           m_MethodName: SetSpawnPercentage
-          m_Mode: 4
+          m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
-            m_FloatArgument: 15
-            m_StringArgument: 
+            m_FloatArgument: 0
+            m_StringArgument: 2|3
             m_BoolArgument: 0
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
@@ -3665,50 +3546,6 @@ MonoBehaviour:
     InEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1497044446}
-          m_MethodName: SetSpawnObjectFocus
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 2
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1497044446}
-          m_MethodName: SetSpawnPercentage
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1497044446}
-          m_MethodName: SetSpawnObjectFocus
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 1
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1497044446}
-          m_MethodName: SetSpawnPercentage
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
         - m_Target: {fileID: 1497044446}
           m_MethodName: set_MaxSpawnNumber
           m_Mode: 3
@@ -3753,54 +3590,26 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-  - InLevel: 10
-    InEvent:
-      m_PersistentCalls:
-        m_Calls:
         - m_Target: {fileID: 1497044446}
-          m_MethodName: set_MaxSpawnNumber
-          m_Mode: 3
+          m_MethodName: SetSpawnPercentage
+          m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 4
+            m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: 
+            m_StringArgument: 1|0
             m_BoolArgument: 0
           m_CallState: 2
         - m_Target: {fileID: 1497044446}
-          m_MethodName: set_MinSpawnNumber
-          m_Mode: 3
+          m_MethodName: SetSpawnPercentage
+          m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 2
+            m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1497044446}
-          m_MethodName: set_MinLimit
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 4
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1497044446}
-          m_MethodName: set_MaxLimit
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 8
-            m_FloatArgument: 0
-            m_StringArgument: 
+            m_StringArgument: 2|0
             m_BoolArgument: 0
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
@@ -3855,7 +3664,57 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
-  - InLevel: 35
+  - InLevel: 30
+    InEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1497044446}
+          m_MethodName: set_MaxSpawnNumber
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 4
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1497044446}
+          m_MethodName: set_MinSpawnNumber
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 2
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1497044446}
+          m_MethodName: set_MinLimit
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 4
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1497044446}
+          m_MethodName: set_MaxLimit
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 8
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+  - InLevel: 40
     InEvent:
       m_PersistentCalls:
         m_Calls:
@@ -3957,5 +3816,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

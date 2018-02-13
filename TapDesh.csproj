@@ -285,6 +285,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Script\AnimationPlay.cs" />
     <Compile Include="Assets\Script\Bullet.cs" />
     <Compile Include="Assets\Script\Enemy\EnemyAI.cs" />
     <Compile Include="Assets\Script\Enemy\EnemyHealth.cs" />
@@ -302,6 +303,7 @@
     <Compile Include="Assets\Script\HUD\MainMenuUI.cs" />
     <Compile Include="Assets\Script\ParticleAttractor.cs" />
     <Compile Include="Assets\Script\ParticleDestroy.cs" />
+    <Compile Include="Assets\Script\PickUps\PickUp.cs" />
     <Compile Include="Assets\Script\PickUps\PickUp_BT.cs" />
     <Compile Include="Assets\Script\PickUps\PickUp_DD.cs" />
     <Compile Include="Assets\Script\PickUps\PickUp_FM.cs" />
@@ -309,6 +311,7 @@
     <Compile Include="Assets\Script\PickUps\PickUp_Inv.cs" />
     <Compile Include="Assets\Script\Player\BulletSpawner.cs" />
     <Compile Include="Assets\Script\Player\CharMovement.cs" />
+    <Compile Include="Assets\Script\Player\CharPart.cs" />
     <Compile Include="Assets\Script\Player\CharShooting.cs" />
     <Compile Include="Assets\Script\Player\HealthPoints.cs" />
     <Compile Include="Assets\Script\Player\MobileInput.cs" />

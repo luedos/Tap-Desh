@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof( MobileInput))]
-public class CharMovement : MonoBehaviour {
+public class CharMovement : CharPart {
 
     public float CameraInterpSpeed = 0;         // How fust camera will move(interp) from one point to another
     public GameObject MyParticle;               // particle on spawn
@@ -11,11 +11,17 @@ public class CharMovement : MonoBehaviour {
     public float TPTime = 0.5f;                 // How long tp will last by itself
     public float TPPenalty = 0.5f;
 
-    public int[] WalkThroughLayers;
-    public int[] TP_InLayers;
+    public GameObject TPDamageParticle;
+
+    public LayerMask WalkThroughLayers;
+    public LayerMask TP_InLayers;
 
     [HideInInspector]
     public Vector3 MyLastLoc;                   // basicly this one used by AI
+
+    public float TPDamageRadius = 3f;
+    [HideInInspector]
+    public int TPDamage = 0;
 
     private float BetterTPTimer = 0f;
     private bool isBetterTP = false;
@@ -107,7 +113,14 @@ public class CharMovement : MonoBehaviour {
         MyCamera.transform.position = CameraPosition;
     }
 
-    
+
+    public override void ResetPart()
+    {
+        isBetterTP = false;
+        BetterTPTimer = 0f;
+        TPDamage = 0;
+    }
+
     // because mobile inpup give us not location but point on the screen in pixels we need to transform it in actual position in world
     private Vector3 GetPositionFromScreen(Vector2 InScreenPos)
     {
@@ -127,6 +140,10 @@ public class CharMovement : MonoBehaviour {
             Instantiate(EndTP_Particle, transform.position, transform.rotation);
 
         gameObject.layer = 12;
+
+        if(TPDamage > 0)
+            DamageOnTP();
+
     }
 
     // so I have a lot of explain here. 
@@ -298,6 +315,11 @@ public class CharMovement : MonoBehaviour {
             // ofcourse every hit must be in result
             OutHit.Add(LocalRayHit);
 
+            PickUp MyPU = LocalRayHit.transform.GetComponent<PickUp>();
+
+            if (MyPU != null)
+                MyPU.PickUpMe(gameObject);
+
             // or we hit not soft wall
             bool findLayer = false;
 
@@ -305,14 +327,8 @@ public class CharMovement : MonoBehaviour {
             if (isBetterTP && LocalRayHit.transform.gameObject.layer == 14)
                 findLayer = true;
             else
-                for (int i = 0; i < WalkThroughLayers.Length; ++i)
-                {
-                    if (WalkThroughLayers[i] == LocalRayHit.transform.gameObject.layer)
-                    {
-                        findLayer = true;
-                        break;
-                    }
-                }
+                if (WalkThroughLayers == (WalkThroughLayers | (1 << LocalRayHit.transform.gameObject.layer)))
+                findLayer = true;
 
             if (!findLayer)
                 return true;
@@ -340,13 +356,32 @@ public class CharMovement : MonoBehaviour {
         if (MyColl.tag == gameObject.tag)
             return true;
 
-        for(int i = 0; i < TP_InLayers.Length; ++i)
+        if (TP_InLayers == (TP_InLayers | (1 << MyColl.gameObject.layer)))
+            return true;
+
+            return false;
+    }
+
+    private void DamageOnTP()
+    {
+        Collider2D[] MyColl = Physics2D.OverlapCircleAll(transform.position, TPDamageRadius);
+
+        EnemyHealth LocalEH;
+        
+
+        for(int i = 0; i < MyColl.Length; ++i)
         {
-            if (MyColl.gameObject.layer == TP_InLayers[i])
-                return true;
+            if(MyColl[i].tag == "Enemy")
+            {
+                LocalEH = MyColl[i].GetComponent<EnemyHealth>();                
+                if (LocalEH != null)
+                    LocalEH.TPDamage(TPDamage);
+            }
         }
 
-        return false;
+        if(TPDamageParticle != null)
+        Instantiate(TPDamageParticle, transform.position, Quaternion.identity);
+
     }
 }
 

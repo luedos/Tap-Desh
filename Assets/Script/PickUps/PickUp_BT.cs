@@ -2,28 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickUp_BT : MonoBehaviour {
+public class PickUp_BT : PickUp {
 
 
     public float BetterTPTime = 5f;         // How long BT will last
-    public int PointsOnTake = 3;            // How many points it will give on pickup
 
-
-    // this is only because unity collision bad
-    private bool isLeft = true;
-
-    public float DestroyInSec = 15f;
-
-    private void Start()
+    public override void PickUpMe(GameObject byObject)
     {
-        if (DestroyInSec > 0)
-            Destroy(gameObject, DestroyInSec);
-    }
-
-    void Update()
-    {
-        transform.position += Vector3.right * (isLeft ? -0.01f : 0.01f);
-        isLeft = !isLeft;
+        CharMovement OtherCM = byObject.GetComponent<CharMovement>();
+        if (OtherCM != null)
+        {
+            OtherCM.MakeBetterTP(BetterTPTime);
+            GameManager.Instance.IncreaseGamePoints(PointsOnTake);
+            Destroy(gameObject);
+        }
     }
 
     // Set up BT
@@ -32,13 +24,7 @@ public class PickUp_BT : MonoBehaviour {
 
         if (other.tag == "Player")
         {
-            CharMovement OtherCM = other.gameObject.GetComponent<CharMovement>();
-            if (OtherCM != null)
-            {
-                OtherCM.MakeBetterTP(BetterTPTime);
-                GameManager.Instance.IncreaseGamePoints(PointsOnTake);
-                Destroy(gameObject);
-            }
+            PickUpMe(other.gameObject);
         }
 
     }

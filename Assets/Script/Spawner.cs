@@ -9,6 +9,19 @@ public struct ChanceObject
     public float MyChance;
 }
 
+public class SpawnListObject
+{
+    public SpawnListObject(int inIndex, int inSpawnNumber)
+    {
+        MyIndex = inIndex;
+        MySpawnNumber = inSpawnNumber;
+    }
+
+    public int MyIndex;
+    public int MySpawnNumber;
+}
+
+
 public class Spawner : MonoBehaviour {
 
     public ChanceObject[] MyChanceObjects;
@@ -42,18 +55,13 @@ public class Spawner : MonoBehaviour {
     private float Timer = 0f;
     private bool bSpawnByTimer = false;
 
-    private int SpawnObjectFocus = 0;
+    private List<SpawnListObject> SpawnList = new List<SpawnListObject>();
 
     // Use this for initialization
     void Start()
     {
 
-        float ChanceSum = 0f;
-        for (int i = 0; i < MyChanceObjects.Length; ++i)
-            ChanceSum += MyChanceObjects[i].MyChance;
-
-        for (int i = 0; i < MyChanceObjects.Length; ++i)
-            MyChanceObjects[i].MyChance *= 100f / ChanceSum;
+        ResetChances();
 
         if (SpawnTimer > 0f)
         {
@@ -71,6 +79,38 @@ public class Spawner : MonoBehaviour {
 
     }
 
+    public bool ResetChances()
+    {
+        if (MyChanceObjects.Length == 0)
+            return false;
+
+        SpawnList.Clear();
+
+        if(MyChanceObjects.Length == 1)
+        {
+            SpawnList.Add(new SpawnListObject(0, 100));
+            return true;
+        }
+
+        float MinChanse = MyChanceObjects[0].MyChance;
+
+        for(int i = 1; i < MyChanceObjects.Length; ++i)
+            if (MyChanceObjects[i].MyChance < MinChanse)
+                MinChanse = MyChanceObjects[i].MyChance;
+        
+
+        MinChanse = Mathf.Ceil(MinChanse) / MinChanse;
+
+        for(int i = 0; i < MyChanceObjects.Length; ++i)
+        {
+            if(MyChanceObjects[i].MyChance > 0f)
+                SpawnList.Add(new SpawnListObject(i, Mathf.CeilToInt(MyChanceObjects[i].MyChance * MinChanse)));
+        }
+
+        
+        return SpawnList.Count > 0;
+    }
+
     bool ChooseObject(out GameObject OutObject)
     {
         if (MyChanceObjects.Length == 0)
@@ -85,17 +125,33 @@ public class Spawner : MonoBehaviour {
             return true;
         }
 
+        if (SpawnList.Count == 0)
+           if( !ResetChances())
+            {
+                OutObject = null;
+                return false;
+            }
+
+
         float MaxChance = 0f;
 
-        float MyChance = Random.Range(0f, 100f);
+        for (int i = 0; i < SpawnList.Count; ++i)
+            MaxChance += SpawnList[i].MySpawnNumber;
+        
 
+        float MyChance = Random.Range(0, MaxChance);
 
-        for(int i = 0; i < MyChanceObjects.Length; ++i)
+        MaxChance = 0;
+
+        for(int i = 0; i < SpawnList.Count; ++i)
         {
-            MaxChance += MyChanceObjects[i].MyChance;
+            MaxChance += SpawnList[i].MySpawnNumber;
             if(MaxChance > MyChance)
             {
-                OutObject = MyChanceObjects[i].MyObject;
+                OutObject = MyChanceObjects[SpawnList[i].MyIndex].MyObject;
+                --SpawnList[i].MySpawnNumber;
+                if (SpawnList[i].MySpawnNumber < 1)
+                    SpawnList.RemoveAt(i);
                 return true;
             }
         }
@@ -114,8 +170,6 @@ public class Spawner : MonoBehaviour {
         else
             NumberOfSpawn = Random.Range(minSpawnNumber, maxSpawnNumber + 1);
 
-        print("Original number : " + NumberOfSpawn);
-
         if (maxLimit > 0)
         {
             int Enemies = GameObject.FindGameObjectsWithTag(Tag).Length;
@@ -133,8 +187,6 @@ public class Spawner : MonoBehaviour {
         }
 
         bool WhatReturn = false;
-
-        print("Rewrite number : " + NumberOfSpawn);
 
         if (SpawnTransforms.Length <= NumberOfSpawn)
         {
@@ -229,46 +281,46 @@ public class Spawner : MonoBehaviour {
     /// 
     /// </summary>
     /// <param name="SpawnObjectIndex"></param>
-    /// <param name="inPercentage"> percent out of 100 </param>
-    public void SetSpawnPercentage(int SpawnObjectIndex, float inPercentage)
+    /// <param name="inPercentage"> Chence </param>
+    public void SetSpawnPercentage(int SpawnObjectIndex, float Chance)
     {
         if(SpawnObjectIndex < MyChanceObjects.Length)
         {
-            float LocalPercent = inPercentage > 100f ? 100f : inPercentage;
-
-            float Coeff = (100f - LocalPercent) / (101f - MyChanceObjects[SpawnObjectIndex].MyChance);
-
-            for (int i = 0; i < MyChanceObjects.Length; ++i)
-                MyChanceObjects[i].MyChance *= Coeff;
-
-            MyChanceObjects[SpawnObjectIndex].MyChance = LocalPercent;
+            MyChanceObjects[SpawnObjectIndex].MyChance = Chance;
+            ResetChances();
         }
     }
 
     /// <summary>
-    /// Change Percentege for object by index of SpawnObjectFocus
-    /// Use SetSpawnObjectFocus to change last
+    /// Change Chance for object by Index
     /// </summary>
-    /// <param name="inPercentage"> percent out of 100 </param>
-    public void SetSpawnPercentage(float inPercentage)
+    /// <param name="inLine"> format of string : Index|Percentage 
+    /// <para> Index - int param, show on which index in array percentage will change </para>
+    /// <para> Percentage - float param, Chance of object  </para> </param>
+    public void SetSpawnPercentage(string inLine)
     {
-        if (SpawnObjectFocus < MyChanceObjects.Length)
-        {
-            float LocalPercent = inPercentage > 100f ? 100f : inPercentage;
 
-            float Coeff = (100f - LocalPercent) / (101f - MyChanceObjects[SpawnObjectFocus].MyChance);
+        string[] MySs = inLine.Split('|');
 
-            for (int i = 0; i < MyChanceObjects.Length; ++i)
-                MyChanceObjects[i].MyChance *= Coeff;
+        if (MySs.Length != 2)
+            return;
 
-            MyChanceObjects[SpawnObjectFocus].MyChance = LocalPercent;
-        }
-    }
+        int Index;
+        if (!int.TryParse(MySs[0], out Index))
+            return;
 
-    public void SetSpawnObjectFocus(int inFocus)
-    {
-        if (inFocus < MyChanceObjects.Length)
-            SpawnObjectFocus = inFocus;
+        if (Index >= MyChanceObjects.Length)
+            return;
+
+        float Chance;
+        if (!float.TryParse(MySs[1], out Chance))
+            return;
+
+        MyChanceObjects[Index].MyChance = Chance;
+
+        
+
+        ResetChances();        
     }
 
 }
