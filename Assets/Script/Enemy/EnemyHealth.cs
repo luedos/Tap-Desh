@@ -27,7 +27,7 @@ public class EnemyHealth : HealthPoints {
     public void TPDamage(int inDamage)
     {
 
-        if (IsDead && DamagedByTP)
+        if (IsDead || DamagedByTP)
             return;
 
         DamagedByTP = true;

@@ -92,12 +92,25 @@ public class Spawner : MonoBehaviour {
             return true;
         }
 
-        float MinChanse = MyChanceObjects[0].MyChance;
+        float MinChanse = 0f;
 
-        for(int i = 1; i < MyChanceObjects.Length; ++i)
+        for (int i = 0; i < MyChanceObjects.Length; ++i)
+        {
+            if (MyChanceObjects[i].MyChance == 0f)
+                continue;
+
+            if (MinChanse == 0f)
+            {
+                MinChanse = MyChanceObjects[i].MyChance;
+                continue;
+            }
+
             if (MyChanceObjects[i].MyChance < MinChanse)
                 MinChanse = MyChanceObjects[i].MyChance;
-        
+        }
+
+        if (MinChanse == 0f)
+            return false;
 
         MinChanse = Mathf.Ceil(MinChanse) / MinChanse;
 
@@ -107,6 +120,7 @@ public class Spawner : MonoBehaviour {
                 SpawnList.Add(new SpawnListObject(i, Mathf.CeilToInt(MyChanceObjects[i].MyChance * MinChanse)));
         }
 
+        
         
         return SpawnList.Count > 0;
     }

@@ -97,6 +97,7 @@ ff05dcdf90651c3d98a9cad3df5e471e UnityEngine.Timeline.dll:UnityEngine.Timeline.C
 6af7378a45ad6da4992a71ef50ddc2eb UnityEngine.Timeline.dll:UnityEngine.Timeline.GroupTrack
 6af7378a45ad6da4992a71ef50ddc2eb UnityEngine.Timeline.dll:UnityEngine.Timeline.PlayableTrack
 9ca6347af5ceb6b0d1c105af31b6722e UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
+eded845f4f0f61b117e74c9dd94ebe86 Assembly-CSharp.dll:.AnimationPlay
 cb0819a6222661e5a88528ab93651dd1 Assembly-CSharp.dll:.GameOverScreen
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
@@ -180,4 +181,3 @@ d6426fba1755d677ae39c7ff06d22301 Assembly-CSharp.dll:.U_EQS_PointCollision2DTest
 b26c7db3c08f22df3bbbefc4cc44196a Assembly-CSharp.dll:.CharMovement
 f8dee8cc4fae9c448cdb92fc259660cb Assembly-CSharp.dll:.HUDPointerScript
 353d25b0326d766c81992c19e3755870 Assembly-CSharp.dll:.PickUp_BT
-eded845f4f0f61b117e74c9dd94ebe86 Assembly-CSharp.dll:.AnimationPlay

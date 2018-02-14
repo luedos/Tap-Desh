@@ -131,7 +131,8 @@ public class GameManager : MonoBehaviour {
 
         NewGame();
     }
-	
+
+
 
 
     void SpawnBonus()

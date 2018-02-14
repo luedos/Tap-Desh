@@ -361,7 +361,7 @@ Transform:
   - {fileID: 390737975}
   - {fileID: 1584713032}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &322058483
 GameObject:
@@ -2078,7 +2078,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4291813072492244, guid: 2205bc96ca52714498ababb986d4831e, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1357968864810478, guid: 2205bc96ca52714498ababb986d4831e, type: 2}
       propertyPath: m_Name
@@ -2097,7 +2097,7 @@ Prefab:
     - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
         type: 2}
       propertyPath: MyChanceObjects.Array.data[2].MyChance
-      value: 0.25
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 114246418546621020, guid: 2205bc96ca52714498ababb986d4831e,
         type: 2}
@@ -2231,7 +2231,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1338332889
 GameObject:
@@ -3287,7 +3287,7 @@ Transform:
   - {fileID: 614029442}
   - {fileID: 1740062854}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2001472587 stripped
 MonoBehaviour:
@@ -3776,19 +3776,19 @@ MonoBehaviour:
   plus_Damage_Hard: 0
   MyDifs:
   - MyDif: 0
-    StartLevel: 20
-    LevelDelta: 20
-    MaxLevel: 51
-    MyLevel: 0
-  - MyDif: 1
     StartLevel: 30
     LevelDelta: 20
     MaxLevel: 51
     MyLevel: 0
-  - MyDif: 2
-    StartLevel: 25
+  - MyDif: 1
+    StartLevel: 40
     LevelDelta: 25
-    MaxLevel: 51
+    MaxLevel: 66
+    MyLevel: 0
+  - MyDif: 2
+    StartLevel: 35
+    LevelDelta: 25
+    MaxLevel: 61
     MyLevel: 0
   - MyDif: 3
     StartLevel: 15
@@ -3801,7 +3801,7 @@ MonoBehaviour:
     MaxLevel: 41
     MyLevel: 0
   - MyDif: 5
-    StartLevel: 35
+    StartLevel: 20
     LevelDelta: 20
     MaxLevel: 56
     MyLevel: 0
@@ -3816,5 +3816,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
