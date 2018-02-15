@@ -11,7 +11,7 @@ public class EnemyHealth : HealthPoints {
     [Tooltip("How many time will pass after death, before owner will be destroy (only if DestroyAfterDeath = true)")]
     public float TimeBeforDestroy = 1f;
 
-    private bool DamagedByTP = false;
+    //private bool DamagedByTP = false;
 
     protected override void Death()
     {
@@ -27,13 +27,12 @@ public class EnemyHealth : HealthPoints {
     public void TPDamage(int inDamage)
     {
 
-        if (IsDead || DamagedByTP)
+        if (IsDead || hp < 2)
             return;
-
-        DamagedByTP = true;
+        
         hp -= inDamage;
         if (hp < 1)
-            Death();
+            hp = 1;
         
     }
 }

@@ -6,6 +6,8 @@ public class GameStats : MonoBehaviour {
 
     private static GameStats instance = null;
 
+    public static bool bGamePaused = false;
+
     public static GameStats Instance
     {
         get
@@ -38,5 +40,19 @@ public class GameStats : MonoBehaviour {
         LastScore = inScore;
         if (LastScore > HighScore)
             HighScore = LastScore;
+    }
+
+    public static void PauseGame(bool isPause)
+    {
+        bGamePaused = isPause;
+
+        if(isPause)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
     }
 }

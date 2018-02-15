@@ -141,8 +141,8 @@ public class CharMovement : CharPart {
 
         gameObject.layer = 12;
 
-        if(TPDamage > 0)
-            DamageOnTP();
+        //if(TPDamage > 0)
+        //    DamageOnTP();
 
     }
 
@@ -315,16 +315,27 @@ public class CharMovement : CharPart {
             // ofcourse every hit must be in result
             OutHit.Add(LocalRayHit);
 
-            PickUp MyPU = LocalRayHit.transform.GetComponent<PickUp>();
+            if (LocalRayHit.transform.tag == "Bonus")
+            {
+                PickUp MyPU = LocalRayHit.transform.GetComponent<PickUp>();
 
-            if (MyPU != null)
-                MyPU.PickUpMe(gameObject);
+                if (MyPU != null)
+                    MyPU.PickUpMe(gameObject);
+            }
+
+            if(TPDamage > 0)
+                if(LocalRayHit.transform.tag == "Enemy")
+                {
+                    EnemyHealth MyEH = LocalRayHit.transform.GetComponent<EnemyHealth>();
+                    if (MyEH != null)
+                        MyEH.TPDamage(TPDamage);
+                }
 
             // or we hit not soft wall
             bool findLayer = false;
 
 
-            if (isBetterTP && LocalRayHit.transform.gameObject.layer == 14)
+            if (TPDamage > 0 && LocalRayHit.transform.gameObject.layer == 14)
                 findLayer = true;
             else
                 if (WalkThroughLayers == (WalkThroughLayers | (1 << LocalRayHit.transform.gameObject.layer)))

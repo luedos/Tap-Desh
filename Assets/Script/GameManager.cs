@@ -239,7 +239,7 @@ public class GameManager : MonoBehaviour {
 
     public void GoMainMenu()
     {
-       
+        GameStats.PauseGame(false);
         SceneManager.LoadScene(0);
     }
 

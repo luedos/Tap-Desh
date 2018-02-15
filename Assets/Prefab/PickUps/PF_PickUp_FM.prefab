@@ -89,12 +89,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caf9c9352b3ee314d8c51152f7ba7846, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PointsOnTake: 3
-  DestroyInSec: 25
-  MaxPoints: 45
-  MinPoints: 30
+  PointsOnTake: 1
+  DestroyInSec: 35
+  MaxPoints: 55
+  MinPoints: 40
   MaxFireMode: 4
-  MaxHPBuffer: 4
+  MaxHPBuffer: 5
   MaxTPDamage: 2
 --- !u!212 &212374699733609928
 SpriteRenderer:

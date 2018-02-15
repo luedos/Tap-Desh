@@ -153,5 +153,7 @@ public class HUDScript : MonoBehaviour {
     public void OpenCloseOptions()
     {
         Options.SetActive(!Options.activeSelf);
+        GameStats.PauseGame(!GameStats.bGamePaused);
     }
+
 }

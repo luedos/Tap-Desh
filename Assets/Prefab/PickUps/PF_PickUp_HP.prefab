@@ -89,9 +89,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b04600397886ef64ba4f87956e1209ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PointsOnTake: 1
+  DestroyInSec: 35
   HealthToRegen: 4
-  PointsOnTake: 3
-  DestroyInSec: 25
 --- !u!212 &212885369052726536
 SpriteRenderer:
   m_ObjectHideFlags: 1

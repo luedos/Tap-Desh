@@ -89,9 +89,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f5c29dacdd87e84c9e27cbc65ec25bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PointsOnTake: 1
+  DestroyInSec: 35
   DDTime: 10
-  PointsOnTake: 4
-  DestroyInSec: 25
 --- !u!212 &212614672794042008
 SpriteRenderer:
   m_ObjectHideFlags: 1
